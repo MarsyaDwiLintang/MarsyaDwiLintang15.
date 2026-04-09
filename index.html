@@ -425,11 +425,28 @@ Menampilkan pesan berdasarkan status.</p>
 //NIM  : 251410028
 //Kelas: SI2A
 
-void handleResponse(ApiResponse response) {
-  if (response is Success) {
-    print("Success: ${response.message}");
-  } else if (response is Error) {
-    print("Error: ${response.errorMessage}");
+sealed class ApiResponse {}
+
+class Success extends ApiResponse {
+  final String message;
+  Success(this.message);
+}
+
+class Error extends ApiResponse {
+  final String errorMessage;
+  Error(this.errorMessage);
+}
+
+void main() {
+  ApiResponse res1 = Success("Data berhasil");
+  ApiResponse res2 = Error("Terjadi kesalahan");
+
+  if (res1 is Success) {
+    print("Success: ${res1.message}");
+  }
+
+  if (res2 is Error) {
+    print("Error: ${res2.errorMessage}");
   }
 }
 </pre>
@@ -475,10 +492,11 @@ void main() {
 </div>
 
 <div class="card">
-<h2>Praktik 1:Multiple Constructor</h2>
-<p>Program ini membuat class Mahasiswa yang memiliki beberapa constructor,
-yaitu constructor default dan named constructor (dariMap() dan tanpaNama()). 
-Tujuannya agar objek mahasiswa bisa dibuat dengan cara yang berbeda. Pada program dibuat 3 objek mahasiswa menggunakan masing-masing constructor.</p>
+<h2>Implementasi Base</h2>
+<p>Subclass bisa mengubah method.
+
+Contoh:
+Anjing dan kucing punya suara berbeda.</p>
 <div class="card">
 <div class="code-box">
 
@@ -489,47 +507,29 @@ Tujuannya agar objek mahasiswa bisa dibuat dengan cara yang berbeda. Pada progra
 //NIM  : 251410028
 //Kelas: SI2A
 
-class Mahasiswa {
-  String nama;
-  int umur;
+class Animal {
+  void speak() {
+    print("Animal speaks");
+  }
+}
 
-  // Constructor default
-
-  Mahasiswa(this.nama, this.umur);
-
-  Mahasiswa.dariMap(Map<String, dynamic> data)
-      : nama = data['nama'],
-        umur = data['umur'];
-
-  Mahasiswa.tanpaNama(this.umur) : nama = "Tanpa Nama";
-
-  void tampilkan() {
-    print("Nama: $nama");
-    print("Umur: $umur");
-    print("----------------");
+class Dog extends Animal {
+  @override
+  void speak() {
+    print("Woof!");
   }
 }
 
 void main() {
-
-  var mhs1 = Mahasiswa("Marsya", 20);
- 
-  var mhs2 = Mahasiswa.dariMap({
-    "nama": "Lintang",
-    "umur": 21
-  });
-
-  var mhs3 = Mahasiswa.tanpaNama(19);
-  mhs1.tampilkan();
-  mhs2.tampilkan();
-  mhs3.tampilkan();
+  Animal dog = Dog();
+  dog.speak();
 }
 </pre>
 
 </div>
 
 </div>
-<button class="btn" onclick="openPopup('https://dartpad.dev/a8c5f02228b860bd1fffe3fcb5cdf7d8?run=true')">Lihat Dartpad</button>
+<button class="btn" onclick="openPopup('https://dartpad.dev/247858457a20ccf2c3bf8cd84154487e?run=true')">Lihat Dartpad</button>
 </div>
   
 <div class="card">
