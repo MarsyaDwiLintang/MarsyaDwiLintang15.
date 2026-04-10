@@ -193,16 +193,15 @@ width:95%;
 
 }
 
-<head>
-
 <style>
 
 .code-box{
 background:black;
 padding:25px;
 border-radius:20px;
-width:350px;
-margin:auto;
+width:100%;
+max-width:650px;
+margin:20px auto;
 box-shadow:0 0 20px rgba(0,0,0,0.5);
 border:2px solid #00cfff;
 }
@@ -369,11 +368,8 @@ void main() {
 </div>
 
 <div class="card">
-<h2>03. Sealed Class</h2>
-<p>Sealed class membatasi turunan class.
-
-Contoh:
-Response API hanya bisa Success atau Error.</p>
+<h2>03. Sealed Class dan Keuntungan</h2>
+<p>Sealed class adalah jenis class dalam Dart yang membatasi pewarisan hanya pada file yang sama. Hal ini membuat struktur program lebih terkontrol karena semua subclass harus didefinisikan dalam satu tempat. Keuntungan menggunakan sealed class adalah dapat mengurangi kesalahan dalam program, mempermudah pengelolaan kode, serta sangat cocok digunakan untuk menangani berbagai kondisi seperti status sukses dan error.</p>
 <div class="card">
 <div class="code-box">
 
@@ -398,23 +394,22 @@ class Error extends ApiResponse {
 }
 
 void main() {
-  ApiResponse res = Success("Berhasil");
-  print(res.runtimeType);
+  ApiResponse response = Success("Data berhasil");
+
+  if (response is Success) {
+    print("Success: ${response.message}");
+  } else if (response is Error) {
+    print("Error: ${response.errorMessage}");
+  }
 }
 </pre>
 
 </div>
 
-</div>
-<button class="btn" onclick="openPopup('https://dartpad.dev/2800af16beb3b749d1711b61572db779?run=true')">Lihat DartPad</button>
-</div>
-
 <div class="card">
-<h2>04. Handler Sealed</h2>
-<p>Digunakan untuk menangani kondisi.
-
-Contoh:
-Menampilkan pesan berdasarkan status.</p>
+<h2>04. Base Class dan Implementasinya</h2>
+<p>Base class adalah class dalam Dart yang hanya dapat diwariskan menggunakan keyword extends dan tidak bisa diimplementasikan secara bebas seperti class biasa. Penggunaan base class bertujuan untuk menjaga struktur pewarisan agar lebih terkontrol.
+Pada implementasinya, subclass dapat mewarisi dan mengubah perilaku method dari base class menggunakan override. Hal ini memungkinkan setiap turunan memiliki perilaku yang berbeda sesuai kebutuhan, meskipun berasal dari class yang sama.</p>
 <div class="card">
 <div class="code-box">
 
@@ -425,70 +420,69 @@ Menampilkan pesan berdasarkan status.</p>
 //NIM  : 251410028
 //Kelas: SI2A
 
-sealed class ApiResponse {}
-
-class Success extends ApiResponse {
-  final String message;
-  Success(this.message);
-}
-
-class Error extends ApiResponse {
-  final String errorMessage;
-  Error(this.errorMessage);
-}
-
-void main() {
-  ApiResponse res1 = Success("Data berhasil");
-  ApiResponse res2 = Error("Terjadi kesalahan");
-
-  if (res1 is Success) {
-    print("Success: ${res1.message}");
-  }
-
-  if (res2 is Error) {
-    print("Error: ${res2.errorMessage}");
-  }
-}
-</pre>
-
-</div>
-
-</div>
-<button class="btn" onclick="openPopup('https://dartpad.dev/446334a9496fbf077b9d781b5fe811e4?run=true')">Lihat DartPad</button>
-</div>        
-
-<div class="card">
-<h2>05. Base Class</h2>
-<p>Base class hanya bisa diwariskan.
-
-Contoh:
-Semua hewan memiliki method speak.</p>
-<div class="card">
-<div class="code-box">
-
-<h3>DART SOURCE CODE</h3>
-
-<pre>
-//Nama : Marsya Dwi Lintang
-//NIM  : 251410028
-//Kelas: SI2A
-
-class Animal {
+base class Animal {
   void speak() {
     print("Animal speaks");
   }
 }
 
+base class Dog extends Animal {
+  @override
+  void speak() {
+    print("Woof!");
+  }
+}
+
 void main() {
-  Animal a = Animal();
-  a.speak();
+  Animal dog = Dog();
+  dog.speak();
 }
 </pre>
 
-</div>
+</div>       
 
-</div>
-<button class="btn" onclick="openPopup('https://dartpad.dev/f60e1c6265f45f69e37f14ba051a2ef1?run=true')">Lihat DartPad</button>
+<div class="card">
+<h2>05.  Final Class</h2>
+<p>Base class adalah class dalam Dart yang digunakan untuk mengatur pewarisan agar lebih terkontrol. Class ini hanya dapat diwariskan menggunakan extends dan tidak dapat diimplementasikan secara bebas. Base class digunakan ketika kita ingin membuat class induk yang akan diturunkan ke beberapa subclass agar struktur program lebih rapi dan konsisten.</p>
+<div class="card">
+<div class="code-box">
+
+<h3>DART SOURCE CODE</h3>
+
+<pre>
+//Nama : Marsya Dwi Lintang
+//NIM  : 251410028
+//Kelas: SI2A
+
+base class Animal {
+  void speak() {
+    print("Animal speaks");
+  }
+}
+
+base class Dog extends Animal {
+  @override
+  void speak() {
+    print("Woof!");
+  }
+}
+
+base class Cat extends Animal {
+  @override
+  void speak() {
+    print("Meow!");
+  }
+}
+
+void main() {
+  Animal dog = Dog();
+  dog.speak();
+
+  Animal cat = Cat();
+  cat.speak();
+}
+</pre>
+
 </div>
 
 <div class="card">
