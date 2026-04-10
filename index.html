@@ -408,41 +408,6 @@ void main() {
 
 <div class="card">
 <h2>04. Base Class dan Implementasinya</h2>
-<p>Base class adalah class dalam Dart yang hanya dapat diwariskan menggunakan keyword extends dan tidak bisa diimplementasikan secara bebas seperti class biasa. Penggunaan base class bertujuan untuk menjaga struktur pewarisan agar lebih terkontrol.
-Pada implementasinya, subclass dapat mewarisi dan mengubah perilaku method dari base class menggunakan override. Hal ini memungkinkan setiap turunan memiliki perilaku yang berbeda sesuai kebutuhan, meskipun berasal dari class yang sama.</p>
-<div class="code-box">
-
-<h3>DART SOURCE CODE</h3>
-
-<pre>
-//Nama : Marsya Dwi Lintang
-//NIM  : 251410028
-//Kelas: SI2A
-
-base class Animal {
-  void speak() {
-    print("Animal speaks");
-  }
-}
-
-base class Dog extends Animal {
-  @override
-  void speak() {
-    print("Woof!");
-  }
-}
-
-void main() {
-  Animal dog = Dog();
-  dog.speak();
-}
-</pre>
-
-</div>
-</div>       
-
-<div class="card">
-<h2>05.  Final Class</h2>
 <p>Base class adalah class dalam Dart yang digunakan untuk mengatur pewarisan agar lebih terkontrol. Class ini hanya dapat diwariskan menggunakan extends dan tidak dapat diimplementasikan secara bebas. Base class digunakan ketika kita ingin membuat class induk yang akan diturunkan ke beberapa subclass agar struktur program lebih rapi dan konsisten.</p>
 <div class="code-box">
 
@@ -483,40 +448,39 @@ void main() {
 </pre>
 
 </div>
-</div>
+</div>       
 
 <div class="card">
-<h2>Implementasi Base</h2>
-<p>Subclass bisa mengubah method.
-
-Contoh:
-Anjing dan kucing punya suara berbeda.</p>
+<h2>05.  Final Class</h2>
+<p>Final class adalah class yang tidak dapat diwariskan (tidak bisa di-extends). Biasanya digunakan untuk menjaga agar class tidak diubah oleh class lain sehingga lebih aman.</p>
 <div class="code-box">
 
 <h3>DART SOURCE CODE</h3>
 
 <pre>
-//Nama : Marsya Dwi Lintang
-//NIM  : 251410028
-//Kelas: SI2A
+final class Settings {
+  final String theme;
+  final int fontSize;
 
-class Animal {
-  void speak() {
-    print("Animal speaks");
-  }
-}
+  Settings({required this.theme, required this.fontSize});
 
-class Dog extends Animal {
-  @override
-  void speak() {
-    print("Woof!");
+  void showSettings() {
+    print("Theme: $theme, Font Size: $fontSize");
   }
 }
 
 void main() {
-  Animal dog = Dog();
-  dog.speak();
+  Settings settings = Settings(theme: "Dark", fontSize: 14);
+  settings.showSettings();
 }
+</pre>
+
+</div>
+</div>
+
+<div class="card">
+<h2>Perbandingan Class Modifiers</h2>
+<p>Sealed, base, dan final class merupakan class modifiers dalam Dart yang digunakan untuk mengatur pewarisan. Sealed class membatasi subclass hanya dalam satu file, base class memastikan class hanya dapat diwariskan dengan extends, sedangkan final class tidak dapat diwariskan sama sekali. Penggunaan masing-masing modifier disesuaikan dengan kebutuhan untuk menjaga struktur kode agar lebih aman dan terkontrol.</p>
 </pre>
 
 </div>
@@ -524,8 +488,8 @@ void main() {
 
   
 <div class="card">
-<h2>4. Private Variable</h2>
-<p>Private variable adalah variabel yang hanya dapat diakses di dalam class dengan menggunakan tanda underscore (_).</p>
+<h2>06. Praktik 1 Sealed Class dengan Pattern Matching</h2>
+<p>Sealed class sering digunakan untuk menangani berbagai kondisi dalam program, seperti loading, berhasil, atau error. Dengan menggunakan sealed class, semua kemungkinan kondisi sudah ditentukan sehingga memudahkan dalam penanganan dan mengurangi kesalahan.</p>
 <div class="card">
 <div class="code-box">
 
@@ -536,32 +500,46 @@ void main() {
 // NIM   : 251410028
 // Kelas : SI2A
 
-class Person {
-  String _name;
-  int age;
+class Status {}
 
-  Person(this._name, this.age);
+class Loading extends Status {}
+
+class Loaded extends Status {
+  final String data;
+  Loaded(this.data);
+}
+
+class Failed extends Status {
+  final String error;
+  Failed(this.error);
+}
+
+void handleStatus(Status status) {
+  if (status is Loading) {
+    print("Loading...");
+  } else if (status is Loaded) {
+    print("Data: ${status.data}");
+  } else if (status is Failed) {
+    print("Error: ${status.error}");
+  }
 }
 
 void main() {
-
-  Person person = Person("Marsya", 20);
-
-  print(person._name);
-  print(person.age);
-
+  handleStatus(Loading());
+  handleStatus(Loaded("Berhasil"));
+  handleStatus(Failed("Terjadi kesalahan"));
 }
 </pre>
 
 </div>
 
 </div>
-<button class="btn" onclick="openPopup('https://dartpad.dev/adccd4fbb13219cc689274f6de55bf79?run=true')">Lihat DartPad</button>
+<button class="btn" onclick="openPopup('https://dartpad.dev/45336d6e9da86770a33ebad6d7a4e464?run=true')">Lihat DartPad</button>
 </div>
 
 <div class="card">
-<h2>5. Getter</h2>
-<p>Getter adalah method yang digunakan untuk mengambil nilai dari variabel private.</p>
+<h2>07. Studi Kasus: Sistem State Management</h2>
+<p>State management digunakan untuk mengatur kondisi dalam aplikasi, seperti saat loading, berhasil, atau terjadi error. Dengan menggunakan class, setiap kondisi dapat direpresentasikan secara jelas sehingga program menjadi lebih terstruktur dan mudah dipahami.</p>
 <div class="card">
 <div class="code-box">
 
@@ -572,34 +550,40 @@ void main() {
 // NIM   : 251410028
 // Kelas : SI2A
 
-class Person {
-  String _name;
-  int age;
+class AppState {}
 
-  Person(this._name, this.age);
+class LoadingState extends AppState {}
 
-  String get getName1 {
-    return _name;
-  }
+class SuccessState extends AppState {
+  final List<String> items;
+  SuccessState(this.items);
+}
 
-  String getName() {
-    return _name;
-  }
+class ErrorState extends AppState {
+  final String message;
+  ErrorState(this.message);
 }
 
 void main() {
-  Person person = Person("Marsya", 19);
+  AppState state = SuccessState(["Item 1", "Item 2", "Item 3"]);
 
-  print(person.age);
-  print(person.getName());
-  print(person.getName1);
+  if (state is LoadingState) {
+    print("Loading...");
+  } else if (state is SuccessState) {
+    print("Data:");
+    for (var item in state.items) {
+      print(item);
+    }
+  } else if (state is ErrorState) {
+    print("Error: ${state.message}");
+  }
 }
 </pre>
 
 </div>
 
 </div>
-<button class="btn" onclick="openPopup('https://dartpad.dev/884cf73ac193f066ca179710db4ebc68?run=true')">Lihat DartPad</button>
+<button class="btn" onclick="openPopup('https://dartpad.dev/fdc663ef1f2fed65eecb80c7c9812d5e?run=true')">Lihat DartPad</button>
 </div>
 
 <div class="card">
