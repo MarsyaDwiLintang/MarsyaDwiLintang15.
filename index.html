@@ -1,981 +1,179 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Multiple Inheritance & Class Modifiers - Marsya Dwi Lintang</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multiple Inheritance - Yellow Theme</title>
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap"
-    rel="stylesheet">
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#111;
+    color:#fff;
+}
 
-  <style>
-    *{ margin:0; padding:0; box-sizing:border-box; }
+/* HEADER */
+header{
+    text-align:center;
+    padding:30px;
+    background:linear-gradient(45deg,#ffd900,#ffea00);
+    color:black;
+    font-weight:bold;
+    font-size:24px;
+    box-shadow:0 0 20px yellow;
+}
 
-    body{
-      font-family:'Poppins',sans-serif;
-      color:#f1f1f1;
-      background:#0b3d2e;
-      overflow-x:hidden;
-    }
+/* CARD */
+.container{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:20px;
+    padding:30px;
+}
 
-    /* Nature Background */
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      background:
-        radial-gradient(circle at 20% 30%, #14532d, transparent 40%),
-        radial-gradient(circle at 80% 70%, #064e3b, transparent 40%),
-        radial-gradient(circle at 50% 50%, #052e16, transparent 60%);
-      z-index:-2;
-    }
+.card{
+    background:#1a1a1a;
+    border:2px solid yellow;
+    border-radius:15px;
+    padding:20px;
+    width:250px;
+    text-align:center;
+    cursor:pointer;
+    transition:0.3s;
+    box-shadow:0 0 10px rgba(255,255,0,0.5);
+}
 
-    .leaves{
-      position:fixed;
-      inset:0;
-      background-image:
-        radial-gradient(2px 2px at 20% 20%, #bbf7d0, transparent),
-        radial-gradient(2px 2px at 70% 40%, #86efac, transparent),
-        radial-gradient(2px 2px at 40% 80%, #4ade80, transparent);
-      background-size:400px 400px;
-      animation:move 60s linear infinite;
-      z-index:-1;
-    }
+.card:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 20px yellow;
+}
 
-    @keyframes move{
-      from{transform:translateY(0);}
-      to{transform:translateY(-400px);}
-    }
+.card h3{
+    color:yellow;
+}
 
-    header{
-      text-align:center;
-      padding:120px 20px 60px;
-    }
+/* POPUP */
+.popup{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    background:rgba(0,0,0,0.8);
+}
 
-    header h1{
-      font-size:clamp(2rem,5vw,3.5rem);
-      color:#bbf7d0;
-      margin-bottom:15px;
-      letter-spacing:4px;
-    }
+/* GALAXY EFFECT */
+.popup-content{
+    width:80%;
+    max-width:500px;
+    padding:30px;
+    border-radius:20px;
+    color:white;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+    border:2px solid yellow;
+    box-shadow:0 0 30px yellow;
+}
 
-    header p{
-      color:#86efac;
-      letter-spacing:2px;
-    }
+/* Background galaxy kuning */
+.popup-content::before{
+    content:"";
+    position:absolute;
+    width:200%;
+    height:200%;
+    top:-50%;
+    left:-50%;
+    background:
+        radial-gradient(circle at 30% 30%, #fff700, transparent 20%),
+        radial-gradient(circle at 70% 60%, #ffd900, transparent 20%),
+        radial-gradient(circle at 50% 80%, #fff200, transparent 20%);
+    animation:moveGalaxy 10s linear infinite;
+    opacity:0.3;
+}
 
-    .container{
-      max-width:1000px;
-      margin:auto;
-      padding:20px;
-    }
+@keyframes moveGalaxy{
+    0%{transform:rotate(0deg);}
+    100%{transform:rotate(360deg);}
+}
 
-    section{
-      background:rgba(255,255,255,0.05);
-      backdrop-filter:blur(20px);
-      border-radius:25px;
-      padding:50px;
-      margin-bottom:90px;
-      opacity:0;
-      transform:translateY(40px);
-      transition:0.8s;
-    }
+.popup h2{
+    color:yellow;
+}
 
-    section.show{
-      opacity:1;
-      transform:translateY(0);
-    }
+/* CLOSE BUTTON */
+.close{
+    margin-top:20px;
+    padding:10px 20px;
+    background:yellow;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+}
 
-    h2{
-      color:#bbf7d0;
-      margin-bottom:25px;
-    }
+.close:hover{
+    background:#fff700;
+    box-shadow:0 0 10px yellow;
+}
 
-    p{
-      line-height:1.9;
-      margin-bottom:25px;
-      color:#e2e8f0;
-    }
-
-    .code-container{
-      background:#041c15;
-      border-radius:15px;
-      overflow:hidden;
-      margin:25px 0;
-    }
-
-    .code-header{
-      background:#052e16;
-      padding:10px 20px;
-      font-size:0.8rem;
-      color:#86efac;
-    }
-
-    pre{
-      padding:20px;
-      font-size:0.9rem;
-      color:#4ade80;
-      overflow-x:auto;
-    }
-
-    button{
-      padding:14px 40px;
-      border:none;
-      border-radius:30px;
-      background:#22c55e;
-      color:#052e16;
-      font-weight:700;
-      cursor:pointer;
-      transition:0.4s;
-    }
-
-    button:hover{
-      background:#bbf7d0;
-      transform:scale(1.05);
-    }
-
-    .modal{
-      display:none;
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,0.9);
-      backdrop-filter:blur(10px);
-      z-index:1000;
-    }
-
-    .modal-content{
-      position:absolute;
-      top:50%;
-      left:50%;
-      transform:translate(-50%,-50%);
-      width:90%;
-      height:85%;
-      background:#052e16;
-      border-radius:20px;
-      overflow:hidden;
-    }
-
-    .modal-content iframe{
-      width:100%;
-      height:100%;
-      border:none;
-    }
-
-    .close{
-      position:absolute;
-      right:25px;
-      top:15px;
-      font-size:40px;
-      color:#bbf7d0;
-      cursor:pointer;
-    }
-
-    footer{
-      text-align:center;
-      padding:80px;
-      color:#86efac;
-      font-size:0.9rem;
-    }
-  </style>
+</style>
 </head>
 
 <body>
 
-<div class="leaves"></div>
-
 <header>
-  <h1>Multiple Inheritance & Class Modifiers
-  </h1>
-  <p>Marsya Dwi Lintang | 251410028 | SI2A</p>
+<h1>✨ Multiple Inheritance & Class Modifiers ✨</h1>
+<p>Marsya Dwi Lintang | 251410028 | SI2A</p>
 </header>
 
 <div class="container">
 
-  <section>
-    <h2>Pengertian Polimorfisme & Abstraksi</h2>
-    <p>
-      Polimorfisme adalah kemampuan objek untuk digunakan dalam berbagai bentuk, sedangkan abstraksi digunakan untuk menyederhanakan program dengan menyembunyikan detail yang tidak diperlukan.
-      Contoh:
-      Satu class Bentuk bisa digunakan oleh Persegi, Lingkaran, dll tanpa mengubah cara pemanggilannya.
-    </p>
-  </section>
+<div class="card">
+<h2>Pengertian Polimorfisme & Abstraksi</h2>
+<p>
+Polimorfisme adalah kemampuan objek untuk digunakan dalam berbagai bentuk, sedangkan abstraksi digunakan untuk menyederhanakan program dengan menyembunyikan detail yang tidak diperlukan.
 
-   <section>
-    <h2>Multiple Inheritance dengan Mixin</h2>
-    <p>
-      Dart tidak mendukung multiple inheritance secara langsung, tetapi menggunakan mixin untuk menambahkan banyak kemampuan dalam satu class.
-      Contoh:
-      Seekor bebek bisa terbang dan berenang karena menggunakan mixin.
-    </p>
-  </section>
+Contoh:
+Satu class Bentuk bisa digunakan oleh Persegi, Lingkaran, dll tanpa mengubah cara pemanggilannya.
+</p>
+</div>
 
-   <section>
-    <h2>01. Studi Kasus Mixin</h2>
+<div class="card" onclick="openPopup('Class B', 'Class B adalah class dasar kedua')">
+    <h3>Class B</h3>
+    <p>Klik untuk detail</p>
+</div>
 
-    <p>
-      Mixin digunakan untuk menambahkan kemampuan ke dalam class.
-      Contoh:
-      Burung bisa terbang, bebek bisa terbang dan berenang.
-    </p>
-    
-    <div class="code-container">
-      <div class="code-header">DART SOURCE CODE</div>
-      <pre><code>//Nama : Marsya Dwi Lintang
-//Nim  : 251410028
-//Kelas: SI2A
+<div class="card" onclick="openPopup('Class C', 'Class C mewarisi dari A dan B')">
+    <h3>Class C</h3>
+    <p>Klik untuk detail</p>
+</div>
 
-mixin CanFly {
-  void fly() {
-    print('Can fly!');
-  }
-}
+</div>
 
-mixin CanSwim {
-  void swim() {
-    print('Can swim!');
-  }
-}
-
-class Bird with CanFly {}
-class Duck extends Bird with CanSwim {}
-
-void main() {
-  Bird bird = Bird();
-  bird.fly();
-
-  Duck duck = Duck();
-  duck.fly();
-  duck.swim();
-}
-
-</code></pre>
+<!-- POPUP -->
+<div class="popup" id="popup">
+    <div class="popup-content">
+        <h2 id="title"></h2>
+        <p id="desc"></p>
+        <button class="close" onclick="closePopup()">Tutup</button>
     </div>
-    <button onclick="openModal('https://dartpad.dev/2933747b7fd24800fd79d5390a2b8fb3&run=true')">Run Program</button>
-  </section>
-
-<section>
-    <h2>Manfaat Polimorfisme</h2>
-    <p>
-      Kode jadi lebih fleksibel, mudah ditambah fitur baru, bisa pakai ulang kode, lebih mudah diperbaiki
-  </section>
-        
-  <section>
-    <h2>03. is dan as Operator</h2>
-
-    <p>Is untuk mengecek tipe data sedangkan as untuk mengubah tipe(casting), digunakan saat kita mau memastikan tipe objek sebelum dipakai.</p>
-    
-    <div class="code-container">
-      <div class="code-header">DART SOURCE CODE</div>
-      <pre><code>//Nama : Marsya Dwi Lintang
-//NIM  : 251410028
-//Kelas: SI2A
-
-class Kendaraan {}
-
-class Mobil extends Kendaraan {
-  void klakson() {
-    print('Tin!');
-  }
-}
-
-void main() {
-  Kendaraan k = Mobil();
-
-  if (k is Mobil) {
-    k.klakson();
-  }
-
-  (k as Mobil?)?.klakson();
-}
-        
-</code></pre>
-    </div>
-    <button onclick="openModal('https://dartpad.dev/6894475f0678b4efce66197810568776')">Run Program</button>
-  </section>
-
-  <section>
-    <h2>04. Praktik1-Polimorfisme dengan List</h2>
-    
-    <p>
-     Kita bisa menyimpan berbagai objek dalam satu list lalu menjalankan method yang sama.
-    </p>
-    
-    <div class="code-container">
-      <div class="code-header">DART SOURCE CODE</div>
-      <pre><code>//Nama : Marsya Dwi Lintang
-//NIM  : 251410028
-//Kelas: SI2A
-
-class Hewan {
-  void bersuara() {
-    print('Hewan bersuara');
-  }
-}
-
-class Kucing extends Hewan {
-  @override
-  void bersuara() => print('Meong');
-}
-
-class Anjing extends Hewan {
-  @override
-  void bersuara() => print('Guk guk');
-}
-
-class Burung extends Hewan {
-  @override
-  void bersuara() => print('Cuit cuit');
-}
-
-void main() {
-  List<Hewan> daftarHewan = [
-    Kucing(),
-    Anjing(),
-    Burung()
-  ];
-
-  for (var h in daftarHewan) {
-    h.bersuara();
-  }
-}
-
-</code></pre>
-    </div>
-    <button onclick="openModal('https://dartpad.dev/c654356b8a617d404f28105f091355b5')">Run Program</button>
-  </section>
-
-  <section>
-    <h2>Pengantar Abstraksi</h2>
-    <p>
-    pengantar abstraksi adalah penjelasan awal tentang konsep abstraksi dalam OOP yang bertujuan menyederhanakan sistem dengan menampilkan fungsi penting saja dan menyembunyikan detail proses agar program lebih mudah dipahami dan digunakan.  tipe data atau objek yang berbeda. Dalam pemrograman OOP, ini memungkinkan kelas turunan mengimplementasikan ulang metode kelas induk
-    </p>
-  </section>
-
-  <section>
-    <h2>05. Abstract Class</h2>
-    
-    <p>
-    Abstract class adalah class yang tidak bisa dibuat objek langsung bisa punya method kosong (abstract) dan berisi (concrete), digunakan sebagai kerangka dasar
-    </p>
-    
-    <div class="code-container">
-      <div class="code-header">DART SOURCE CODE</div>
-      <pre><code>// Nama : Marsya Dwi Lintang
-// NIM  : 251410028
-// Kleas: SI2A
-
-abstract class Kendaraan {
-  String? merk;
-
-  void start();
-
-  void stop() {
-    print('Kendaraan berhenti');
-  }
-}
-
-class Mobil extends Kendaraan {
-  @override
-  void start() {
-    print('Mobil $merk menyala');
-  }
-}
-
-void main() {
-  Mobil m = Mobil();
-  m.merk = 'Toyota';
-  
-  m.start();
-  m.stop();
-}
-
- </code></pre>
-    </div>
-    <button onclick="openModal('https://dartpad.dev/5245a643cc15485130704c9e03227034')">Run Program</button>
-  </section>
-
-  <section>
-    <h2>06. Abstract Method</h2>
-    <p>
-    abstract method adalah metode yang tidak memiliki isi atau implementasi di dalam abstract class dan harus diimplementasikan oleh class turunan yang mewarisinya agar dapat digunakan dalam program.
-    </p>
-    
-    <div class="code-container">
-      <div class="code-header">DART SOURCE CODE</div>
-      <pre><code>//Nama : Marsya Dwi Lintang
-//NIM  : 251410028
-//Kelas: SI2A
-
-abstract class AlatMusik {
-  void mainkan();
-
-  void info() {
-    print('Ini adalah alat musik');
-  }
-}
-
-class Gitar extends AlatMusik {
-  @override
-  void mainkan() {
-    print('Jreng jreng...');
-  }
-}
-
-void main() {
-  Gitar gitar = Gitar();
-  
-  gitar.info();
-  gitar.mainkan();
-}
-
-      </code></pre>
-    </div>
-    <button onclick="openModal('https://dartpad.dev/6a93abd2560ccf10fff0a77a3d9c7905')">Run Program</button>
-  </section>
-
-  <section>
-    <h2>07. Interface di Dart</h2>
-    <p>
-      interface adalah konsep dalam OOP yang berfungsi sebagai kontrak atau aturan yang berisi metode yang harus diimplementasikan oleh class lain, sehingga setiap class yang menggunakan interface wajib mengikuti metode yang telah ditentukan.
-    </p>
-    <div class="code-container">
-      <div class="code-header">DART SOURCE CODE</div>
-      <pre><code>// Nama : Marsya Dwi Lintang
-// NIM  : 251410028
-// Kelas: S1A
-
-interface class Flyable {
-  void terbang() => print('Terbang...');
-}
-
-class Bird implements Flyable {
-  @override
-  void terbang() => print('Burung terbang tinggi');
-}
-
-class Plane implements Flyable {
-  @override
-  void terbang() => print('Pesawat terbang cepat');
-}
-
-void main() {
-  Bird b = Bird();
-  Plane p = Plane();
-
-  b.terbang();
-  p.terbang();
-}
-        
-      </code></pre>
-    </div>
-    <button onclick="openModal('https://dartpad.dev/54cecb27b21b101daf7ef5bfceb59fd6')">Run Program</button>
-  </section>
-
-  <section>
-    <h2>Perbedaan Extends dan [Implements</h2>
-
-    <p>
-      extends adalah pewarisan class dari class induk sehingga class turunan bisa menggunakan semua properti dan metode dari class induk, sedangkan implements adalah penggunaan interface sebagai kontrak sehingga class harus membuat ulang semua metode yang ada di interface.
-    </p>
-  </section>
-
-   <section>
-    <h2>08. Static Members dan Method</h2>
-
-    <p>
-    Static itu milik class, bukan objek.Jadi bisa dipakai langsung tanpa membuat objek.
-    </p>
-    
-    <div class="code-container">
-      <div class="code-header">DART SOURCE CODE</div>
-      <pre><code>//Nama : Marsya Dwi Lintang
-//NIM  : 251410028
-//Kelas: SI2A
-
-class MathUtils {
-  static double pi = 3.14;
-
-  static int add(int x, int y) {
-    return x + y;
-  }
-}
-
-void main() {
-  print('Nilai pi : ${MathUtils.pi}');
-  print('Result : ${MathUtils.add(10, 20)}');
-}
-
-</code></pre>
-    </div>
-    <button onclick="openModal('https://dartpad.dev/2f6a02ff815a3bc4796e7de54baf1edb')">Run Program</button>
-  </section>
-
-<section>
-    <h2>09. Praktik2-Sistem Pembayaran</h2>
-
-    <p>
-     sistem pembayaran adalah mekanisme atau proses yang digunakan untuk melakukan transaksi pembayaran antara pembeli dan penjual, baik secara tunai maupun non-tunai, agar pembayaran dapat dilakukan dengan mudah, aman, dan teratur.
-    </p>
-    
-    <div class="code-container">
-      <div class="code-header">DART SOURCE CODE</div>
-      <pre><code>//Nama : Marsya Dwi Lintang
-//NIM  : 251410028
-//Kelas: SI2A
-
-abstract class MetodePembayaran {
-  void bayar(double jumlah);
-}
-
-class KartuKredit implements MetodePembayaran {
-  @override
-  void bayar(double jumlah) {
-    print('Bayar $jumlah dengan Kartu Kredit');
-  }
-}
-
-class EWallet implements MetodePembayaran {
-  @override
-  void bayar(double jumlah) {
-    print('Bayar $jumlah dengan E-Wallet');
-  }
-}
-
-class Tunai implements MetodePembayaran {
-  @override
-  void bayar(double jumlah) {
-    print('Bayar $jumlah dengan Tunai');
-  }
-}
-
-void main() {
-  List<MetodePembayaran> metode = [
-    KartuKredit(),
-    EWallet(),
-    Tunai()
-  ];
-
-  for (var m in metode) {
-    m.bayar(100000);
-  }
-}
-        
- </code></pre>
-    </div>
-    <button onclick="openModal('https://dartpad.dev/abd04752ae6ec676d174f5871331c88f')">Run Program</button>
-  </section>
-
-  <section>
-    <h2>10. Studi kasus:Sistem Bentuk Geometrik</h2>
-
-    <p>
-     sistem bentuk geometrik adalah sistem dalam OOP yang menggunakan konsep abstraksi untuk merepresentasikan berbagai bentuk geometri (seperti persegi, lingkaran, segitiga) dalam satu class dasar, sehingga setiap bentuk memiliki metode yang sama seperti menghitung luas atau keliling tetapi dengan perhitungan yang berbeda.
-    </p>
-
-    <div class="code-container">
-      <div class="code-header">DART SOURCE CODE</div>
-      <pre><code>//Nama : Marsya Dwi Lintang
-//NIM  : 251410028
-//Kelas: SI2A
-
-abstract class Bentuk {
-  double hitungLuas();
-  double hitungKeliling();
-
-  void info() {
-    print('Luas: ${hitungLuas()}, Keliling: ${hitungKeliling()}');
-  }
-}
-
-class Persegi implements Bentuk {
-  double sisi;
-
-  Persegi(this.sisi);
-
-  @override
-  double hitungLuas() => sisi * sisi;
-
-  @override
-  double hitungKeliling() => 4 * sisi;
-
-  @override
-  void info() {
-    print('Persegi sisi $sisi, luas ${hitungLuas()}, keliling ${hitungKeliling()}');
-  }
-}
-
-class Lingkaran implements Bentuk {
-  double radius;
-
-  Lingkaran(this.radius);
-
-  @override
-  double hitungLuas() => 3.14 * radius * radius;
-
-  @override
-  double hitungKeliling() => 2 * 3.14 * radius;
-
-  @override
-  void info() {
-    print('Lingkaran radius $radius, luas ${hitungLuas()}, keliling ${hitungKeliling()}');
-  }
-}
-
-void main() {
-  Bentuk b1 = Persegi(4);
-  Bentuk b2 = Lingkaran(7);
-
-  b1.info();
-  b2.info();
-}
-
- </code></pre>
-    </div>
-    <button onclick="openModal('https://dartpad.dev/89c88b834c7a33ee592731229d1f2d5f')">Run Program</button>
-  </section>
-
- <section>
-    <h2>Kesimpulan</h2>
-
-    <p>
-      Dari materi ini bisa disimpulkan bahwa: Pemrograman OOP membantu kita membuat program lebih rapi, fleksibel, dan mudah dikembangkan. Dengan konsep seperti pewarisan, polimorfisme, abstraksi, dan interface, kita bisa menghemat kode dan membuat sistem yang lebih terstruktur.
-    </p>
-  </section>
-
-    <section>
-    <h2>11. Bonus1</h2>
-
-    <p>
-     Latihan ini menunjukkan penggunaan abstract class dan polimorfisme, di mana Pekerja menjadi dasar yang menentukan method bekerja() serta bisa memiliki method lain yang sudah berisi seperti istirahat(), kemudian class seperti Programmer, Dokter, dan Guru menjalankan method tersebut dengan cara yang berbeda-beda sesuai perannya, sehingga meskipun strukturnya sama, perilakunya bisa berbeda.
-    </p>
-
-    <div class="code-container">
-      <div class="code-header">DART SOURCE CODE</div>
-      <pre><code>// Nama : Marsya Dwi Lintang
-// NIM  : 251410028
-// Kelas: S1A
-
-abstract class Pekerja {
-  void bekerja();
-  void info();
-}
-
-class Programmer implements Pekerja {
-  @override
-  void bekerja() {
-    print('Programmer sedang coding');
-  }
-
-  @override
-  void info() {
-    print('Saya seorang programmer');
-  }
-}
-
-class Dokter implements Pekerja {
-  @override
-  void bekerja() {
-    print('Dokter sedang memeriksa pasien');
-  }
-
-  @override
-  void info() {
-    print('Saya seorang dokter');
-  }
-}
-
-class Guru implements Pekerja {
-  @override
-  void bekerja() {
-    print('Guru sedang mengajar');
-  }
-
-  @override
-  void info() {
-    print('Saya seorang guru');
-  }
-}
-
-void main() {
-  Programmer p = Programmer();
-  Dokter d = Dokter();
-  Guru g = Guru();
-
-  p.bekerja();
-  p.info();
-
-  d.bekerja();
-  d.info();
-
-  g.bekerja();
-  g.info();
-}
-
-</code></pre>
-    </div>
-    <button onclick="openModal('https://dartpad.dev/51824c16dd40008a66c179a9d9e4574e')">Run Program</button>
-  </section>
-
-   <section>
-    <h2>12. Bonus2</h2>
-
-    <p>
-    Kode ini menjelaskan bahwa dalam Dart, pewarisan berganda tidak dapat dilakukan dengan extends, namun dapat dicapai melalui implements. Dengan demikian, satu class dapat mengikuti beberapa aturan atau antarmuka dari class lain sekaligus, meskipun tidak menjadi turunan langsung.
-    </p>
-
-    <div class="code-container">
-      <div class="code-header">DART SOURCE CODE</div>
-      <pre><code>//Nama : Marsya Dwi Lintang
-//NIM  : 251410028
-//Kelas: SI2A
-
-class Komputer {
-  void hitung() => print('Mengolah data');
-}
-
-class Kamera {
-  void foto() => print('Mengambil foto');
-}
-
-class Telepon {
-  void telpon() => print('Melakukan panggilan');
-}
-
-class Tablet implements Komputer, Kamera, Telepon {
-  @override
-  void hitung() {
-    print('Tablet mengolah data');
-  }
-
-  @override
-  void foto() {
-    print('Tablet mengambil foto');
-  }
-
-  @override
-  void telpon() {
-    print('Tablet melakukan panggilan');
-  }
-}
-
-void main() {
-  Tablet t = Tablet();
-  t.hitung();
-  t.foto();
-  t.telpon();
-}
-
-</code></pre>
-    </div>
-    <button onclick="openModal('https://dartpad.dev/feafcf2bcc416284d16f1faa05cd2593')">Run Program</button>
-  </section>
-
-  <section>
-    <h2>13. Bonus3</h2>
-
-    <p>
-    Kode ini menunjukkan penggunaan static, yaitu atribut atau fungsi yang menjadi milik class secara langsung, bukan milik objek. Karena itu, penggunaannya bisa langsung melalui nama class tanpa harus membuat instance terlebih dahulu.
-    </p>
-
-    <div class="code-container">
-      <div class="code-header">DART SOURCE CODE</div>
-      <pre><code>//Nama : Marsya Dwi Lintang
-//NIM  : 251410028
-//Kelas: SI2A
-
-import 'dart:math';
-
-class MathUtils {
-  
-  // Faktorial
-  static int faktorial(int n) {
-    if (n <= 1) return 1;
-    return n * faktorial(n - 1);
-  }
-
-  // Cek bilangan prima
-  static bool isPrima(int n) {
-    if (n < 2) return false;
-    for (int i = 2; i <= sqrt(n).toInt(); i++) {
-      if (n % i == 0) return false;
-    }
-    return true;
-  }
-
-  // Pembulatan desimal
-  static double roundDouble(double value, int places) {
-    double mod = pow(10, places).toDouble();
-    return (value * mod).round() / mod;
-  }
-
-  // Random integer
-  static int randomInt(int min, int max) {
-    return min + Random().nextInt(max - min + 1);
-  }
-
-  // Random double
-  static double randomDouble(double min, double max) {
-    return min + Random().nextDouble() * (max - min);
-  }
-
-  // Rata-rata
-  static double rataRata(List<double> angka) {
-    double total = angka.reduce((a, b) => a + b);
-    return total / angka.length;
-  }
-
-  // Median
-  static double median(List<double> angka) {
-    angka.sort();
-    int n = angka.length;
-
-    if (n % 2 == 1) {
-      return angka[n ~/ 2];
-    } else {
-      return (angka[n ~/ 2 - 1] + angka[n ~/ 2]) / 2;
-    }
-  }
-}
-
-void main() {
-  print(MathUtils.faktorial(5));
-  print(MathUtils.isPrima(7));
-  print(MathUtils.roundDouble(3.14159, 2));
-  print(MathUtils.randomInt(1, 10));
-  print(MathUtils.randomDouble(1, 5));
-  print(MathUtils.rataRata([10, 20, 30]));
-  print(MathUtils.median([1, 3, 2, 4]));
-}
-
-</code></pre>
-    </div>
-    <button onclick="openModal('https://dartpad.dev/b9b4611d6e12c64870b150eab79f3e8e')">Run Program</button>
-  </section>
-
-<section>
-    <h2>14. Challenge </h2>
-
-    <p>
-    Kode ini memperlihatkan kombinasi abstract class dan interface dalam membuat sistem media player yang lebih terstruktur. Abstract class MediaPlayer digunakan sebagai dasar umum, sedangkan Playable dan Pausable berperan sebagai aturan perilaku yang harus diterapkan, sehingga setiap class dapat menjalankan fungsi yang sama dengan cara yang berbeda-beda.Kode ini menunjukkan penggunaan static, yaitu atribut atau fungsi yang menjadi milik class secara langsung, bukan milik objek. Karena itu, penggunaannya bisa langsung melalui nama class tanpa harus membuat instance terlebih dahulu.
-    </p>
-
-    <div class="code-container">
-      <div class="code-header">DART SOURCE CODE</div>
-      <pre><code>//Nama : Marsya Dwi Lintang
-//NIM  : 251410028
-//Kelas: SI2A
-
-abstract class MediaPlayer {
-  void play();
-}
-
-// Interface Playable
-abstract class Playable {
-  void start();
-}
-
-// Interface Pausable
-abstract class Pausable {
-  void pause();
-}
-
-// AudioPlayer
-class AudioPlayer extends MediaPlayer implements Playable, Pausable {
-  @override
-  void play() {
-    print('Memutar audio');
-  }
-
-  @override
-  void start() {
-    print('Audio dimulai');
-  }
-
-  @override
-  void pause() {
-    print('Audio dijeda');
-  }
-}
-
-// VideoPlayer
-class VideoPlayer extends MediaPlayer implements Playable, Pausable {
-  @override
-  void play() {
-    print('Memutar video');
-  }
-
-  @override
-  void start() {
-    print('Video dimulai');
-  }
-
-  @override
-  void pause() {
-    print('Video dijeda');
-  }
-}
-
-// MAIN (langsung tes semua)
-void main() {
-  List<MediaPlayer> players = [
-    AudioPlayer(),
-    VideoPlayer()
-  ];
-
-  for (var p in players) {
-    p.play();
-
-    if (p is Playable) {
-      (p as Playable).start();
-    }
-
-    if (p is Pausable) {
-      (p as Pausable).pause();
-    }
-
-    print('---');
-  }
-}
-
-</code></pre>
-    </div>
-    <button onclick="openModal('https://dartpad.dev/fe2a74a77c6fc85746061b65d3fd5ce0')">Run Program</button>
-  </section>
-
-<div id="modal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal()">&times;</span>
-    <iframe id="dartFrame"></iframe>
-  </div>
 </div>
 
 <script>
-const sections=document.querySelectorAll("section");
-const observer=new IntersectionObserver(entries=>{
- entries.forEach(entry=>{
-   if(entry.isIntersecting){
-     entry.target.classList.add("show");
-   }
- });
-},{threshold:0.1});
-sections.forEach(sec=>observer.observe(sec));
-
-function openModal(link){
- document.getElementById("modal").style.display="block";
- document.getElementById("dartFrame").src=link;
- document.body.style.overflow="hidden";
+function openPopup(title, desc){
+    document.getElementById("popup").style.display = "flex";
+    document.getElementById("title").innerText = title;
+    document.getElementById("desc").innerText = desc;
 }
 
-function closeModal(){
- document.getElementById("modal").style.display="none";
- document.getElementById("dartFrame").src="";
- document.body.style.overflow="auto";
-}
-
-window.onclick=function(e){
- if(e.target==document.getElementById("modal")) closeModal();
+function closePopup(){
+    document.getElementById("popup").style.display = "none";
 }
 </script>
 
