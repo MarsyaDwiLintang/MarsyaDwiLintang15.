@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Multiple Inheritance & Class Modifiers - Marsya Dwi Lintang</title>
+<title>Laporan OOP Dart</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
@@ -46,8 +46,10 @@ margin-top:10px;
 
 .container{
 max-width:1100px;
-margin:40px auto;
-padding:0 15px;
+margin:auto;
+display:flex;
+flex-direction:column;
+gap:30px;
 }
 
 /* CARD */
@@ -57,12 +59,6 @@ background:#1c1f6e;
 padding:30px;
 border-radius:18px;
 box-shadow:0 10px 30px rgba(0,0,0,0.4);
-margin-bottom:30px;
-}
-
-.card .card{
-  padding:5px;
-  margin:0;
 }
 
 /* TITLE */
@@ -203,9 +199,8 @@ width:95%;
 background:black;
 padding:25px;
 border-radius:20px;
-width:100%;
-max-width:650px;
-margin:20px auto;
+width:350px;
+margin:auto;
 box-shadow:0 0 20px rgba(0,0,0,0.5);
 border:2px solid #00cfff;
 }
@@ -237,7 +232,7 @@ cursor:pointer;
 
 </head>
 
-<body> 
+<body>
 
 <header>
 <h1>Multiple Inheritance & Class Modifiers</h1>
@@ -247,32 +242,22 @@ cursor:pointer;
 <div class="container">
 
 <div class="card">
-<h2>Pengertian Polimorfisme & Abstraksi</h2>
+<h2>Pengertian & Abstraksi</h2>
 <p>
-Polimorfisme adalah kemampuan objek untuk digunakan dalam berbagai bentuk, sedangkan abstraksi digunakan untuk menyederhanakan program dengan menyembunyikan detail yang tidak diperlukan.
-
-Contoh:
-Satu class Bentuk bisa digunakan oleh Persegi, Lingkaran, dll tanpa mengubah cara pemanggilannya.
+Polimorfisme adalah satu tipe bisa digunakan dalam berbagai bentuk, sedangkan Abstract Class yaitu class yang tidak bisa dibuat object langsung. Biasanya dipakai sebagai dasar untuk calss lain
 </p>
 </div>
 
 <div class="card">
 <h2>Multiple Inheritance dengan Mixin</h2>
 <p>
-Dart tidak mendukung multiple inheritance secara langsung, tetapi menggunakan mixin untuk menambahkan banyak kemampuan dalam satu class.
-
-Contoh:
-Seekor bebek bisa terbang dan berenang karena menggunakan mixin.
+Dart menggunakan mixin untuk multiple inheritance tidak seperti Java/C#, Drt bisa gabungkan beberapa kemampuan digunakan untuk menghindari duplikasi kode. Contoh kasus: Bebek bisa berenang & terbang, Smartphone kamera & telepon
 </p>
 </div>
 
 <div class="card">
-<h2>01. Studi Kasus Mixin</h2>
-<p>Mixin digunakan untuk menambahkan kemampuan ke dalam class.
-
-Contoh:
-Burung bisa terbang, bebek bisa terbang dan berenang.</p>
-</p>
+<h2>01. Studi Kasus Burung dan Bebek</h2>
+<p>Objek bisa punya lebih dari satu kemampuan, misalnya: Burung terbang Bebek terbang + berenang</p>
 
 <div class="card">
 <div class="code-box">
@@ -280,9 +265,9 @@ Burung bisa terbang, bebek bisa terbang dan berenang.</p>
 <h3>DART SOURCE CODE</h3>
 
 <pre>
-//Nama : Marsya Dwi Lintang
-//NIM  : 251410028
-//Kelas: SI2A
+// Nama  : Marsya Dwi Lintang
+// NIM   : 251410028
+// Kelas : SI2A
 
 mixin CanFly {
   void fly() {
@@ -297,6 +282,7 @@ mixin CanSwim {
 }
 
 class Bird with CanFly {}
+
 class Duck extends Bird with CanSwim {}
 
 void main() {
@@ -312,68 +298,14 @@ void main() {
 </div>
 
 </div>
-<button class="btn" onclick="openPopup('https://dartpad.dev/2933747b7fd24800fd79d5390a2b8fb3?run=true')">Lihat DartPad</button>
-</div>
-
-<div class="card">
-<h2>02. Mixin dengan State</h2>
-<p>Mixin juga bisa menyimpan kondisi (state).
-
-Contoh:
-Objek bisa mengetahui apakah sudah terbang atau belum.</p>
-</p>
-
-<div class="card">
-<div class="code-box">
-
-<h3>DART SOURCE CODE</h3>
-
-<pre>
-//Nama : Marsya Dwi Lintang
-//NIM  : 251410028
-//Kelas: SI2A
-
-mixin CanFly {
-  bool _isFlying = false;
-
-  void fly() {
-    if (!_isFlying) {
-      _isFlying = true;
-      print('Started flying!');
-    } else {
-      print('Already flying!');
-    }
-  }
-}
-
-class Duck with CanFly {}
-
-void main() {
-  Duck duck = Duck();
-  duck.fly();
-  duck.fly();
-}
-</pre>
-
-</div>
-
-</div>
-<button class="btn" onclick="openPopup('https://dartpad.dev/2de038cb8be2e83e089f9ce5a6127ceb?run=true')">Lihat DartPad</button>
+<button class="btn" onclick="openPopup('https://dartpad.dev/ab46c06583d17ab7d9843e7f40895a24?run=true')">Lihat DartPad</button>
 </div>
   
 <div class="card">
-<h2>Pengantar Class Modifiers</h2>
-<ul>
-<li>Contoh:</li>
-<li>sealed → hanya subclass tertentu</li>
-<li>base → hanya bisa diwariskan</li>
-<li>final → tidak bisa diwariskan</li>
-</ul>
-</div>
+<h2>02. Studi Kasus Mixin dengan State</h2>
+<p>Mixin juga bisa memiliki state atau kondsi seperti status terbang dan berenang, sehingga tidak hanya menambahkan fungsi tetapi juga menyimpan kondisi object.</p>
 
 <div class="card">
-<h2>03. Sealed Class dan Keuntungan</h2>
-<p>Sealed class adalah jenis class dalam Dart yang membatasi pewarisan hanya pada file yang sama. Hal ini membuat struktur program lebih terkontrol karena semua subclass harus didefinisikan dalam satu tempat. Keuntungan menggunakan sealed class adalah dapat mengurangi kesalahan dalam program, mempermudah pengelolaan kode, serta sangat cocok digunakan untuk menangani berbagai kondisi seperti status sukses dan error.</p>
 <div class="code-box">
 
 <h3>DART SOURCE CODE</h3>
@@ -383,6 +315,100 @@ void main() {
 // NIM   : 251410028
 // Kelas : SI2A
 
+mixin CanFly {
+  bool _isFlying = false;
+  bool get isFlying => _isFlying;
+
+  void fly() {
+    if (!_isFlying) {
+      _isFlying = true;
+      print('Started flying!');
+    } else {
+      print('Already flying!');
+    }
+  }
+
+  void land() {
+    if (_isFlying) {
+      _isFlying = false;
+      print('Landed!');
+    } else {
+      print('Already on the ground!');
+    }
+  }
+}
+
+mixin CanSwim {
+  bool _isSwimming = false;
+  bool get isSwimming => _isSwimming;
+
+  void swim() {
+    if (!_isSwimming) {
+      _isSwimming = true;
+      print('Started swimming!');
+    } else {
+      print('Already swimming!');
+    }
+  }
+
+  void stopSwim() {
+    if (_isSwimming) {
+      _isSwimming = false;
+      print('Stop swimming!');
+    } else {
+      print('Already on stop swimming!');
+    }
+  }
+}
+
+class Bird with CanFly {}
+class Duck extends Bird with CanSwim {}
+class Fish with CanSwim {}
+class Airplane with CanFly {}
+
+void main() {
+  Bird bird = Bird();
+  bird.fly();
+  bird.land();
+
+  Duck duck = Duck();
+  duck.fly();
+  duck.swim();
+
+  Fish fish = Fish();
+  fish.swim();
+
+  Airplane airplane = Airplane();
+  airplane.fly();
+}
+</pre>
+
+</div>
+
+</div>
+<button class="btn" onclick="openPopup('https://dartpad.dev/45360819f1f333ec92a3b22a8fcf960f?run=true')">Lihat DartPad</button>
+</div>
+
+<div class="card">
+<h2>Pengantar Class Modifiers</h2>
+<p>
+Class Modifiers yang digunakan untuk mengontrol bagaimana calss digunakan, terutama dalam hal inheritance dan keamanan struktur kode, seperti sealed, base, dan final.
+</p>
+</div>
+
+<div class="card">
+<h2>03. Sealed Class</h2>
+<p>Sealed Class hanya bisa diwariskan dalam file yang sama sehingga lebih aman dan semua subclass dapat dikontrol.</p>
+
+<div class="card">
+<div class="code-box">
+
+<h3>DART SOURCE CODE</h3>
+
+<pre>
+// Nama  : Marsya Dwi Lintang
+// NIM   : 251410028
+// Kelas : SI2A
 
 sealed class ApiResponse {}
 
@@ -397,22 +423,102 @@ class Error extends ApiResponse {
 }
 
 void main() {
-  ApiResponse response = Success("Data berhasil");
+  // contoh penggunaan sederhana
+  ApiResponse res1 = Success("Berhasil");
+  ApiResponse res2 = Error("Gagal");
 
-  if (response is Success) {
-    print("Success: ${response.message}");
-  } else if (response is Error) {
-    print("Error: ${response.errorMessage}");
-  }
+  print(res1);
+  print(res2);
 }
 </pre>
 
 </div>
+
+</div>
+<button class="btn" onclick="openPopup('https://dartpad.dev/72cec06a3a0f853fc1eae2e567d9b22f?run=true')">Lihat DartPad</button>
 </div>
 
 <div class="card">
-<h2>04. Base Class dan Implementasinya</h2>
-<p>Base class adalah class dalam Dart yang digunakan untuk mengatur pewarisan agar lebih terkontrol. Class ini hanya dapat diwariskan menggunakan extends dan tidak dapat diimplementasikan secara bebas. Base class digunakan ketika kita ingin membuat class induk yang akan diturunkan ke beberapa subclass agar struktur program lebih rapi dan konsisten.</p>
+<h2></h2>
+<ul>
+<li>Melindungi data</li>
+<li>Mengontrol akses terhadap data</li>
+<li>Membuat program lebih aman</li>
+<li>Di Dart dilakukan dengan: Private Field (_), Getter, dan Setter</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>1. Constructor Mobil</h2>
+<p>Constructor adalah method khusus pada class yang digunakan untuk membuat objek dan menginisialisasi nilai awal atribut.</p>
+<div class="card">
+<div class="code-box">
+
+<h3>DART SOURCE CODE</h3>
+
+<pre>
+// Nama  : Marsya Dwi Lintang
+// NIM   : 251410028
+// Kelas : SI2A
+
+
+import 'dart:convert';
+
+class Mobil {
+  String? merk;
+  int? tahun;
+
+  // Parameterized constructor
+  Mobil(this.merk, this.tahun);
+
+  // Named constructor
+  Mobil.baru() {
+    merk = 'Toyota';
+    tahun = 2023;
+  }
+
+  // Named constructor dengan parameter
+  Mobil.dariJson(Map<String, dynamic> json) {
+    merk = json['merk'];
+    tahun = json['tahun'];
+  }
+
+  @override
+  String toString() {
+    return 'Mobil{merk: $merk, tahun: $tahun}';
+  }
+}
+
+void main() {
+  print('--- Demonstrasi Class Mobil ---');
+
+  var mobilA = Mobil('Honda', 2020);
+  print('Mobil A: $mobilA');
+
+  var mobilB = Mobil.baru();
+  print('Mobil B: $mobilB');
+
+  String jsonString = '{"merk": "Suzuki", "tahun": 2021}';
+  Map<String, dynamic> jsonData = jsonDecode(jsonString);
+  var mobilC = Mobil.dariJson(jsonData);
+  print('Mobil C: $mobilC');
+
+  Map<String, dynamic> anotherJsonData = {'merk': 'Mitsubishi', 'tahun': 2022};
+  var mobilD = Mobil.dariJson(anotherJsonData);
+  print('Mobil D: $mobilD');
+}
+</pre>
+
+</div>
+
+</div>
+<button class="btn" onclick="openPopup('https://dartpad.dev/7cf3b434e898084aa16d711f9069bd70?run=true')">Lihat DartPad</button>
+</div>
+
+<div class="card">
+<h2>2. Constant Constructor</h2>
+<p>Constant constructor digunakan untuk membuat objek konstan sehingga nilai objek tidak dapat diubah setelah dibuat.</p>
+<div class="card">
 <div class="code-box">
 
 <h3>DART SOURCE CODE</h3>
@@ -422,79 +528,133 @@ void main() {
 //NIM  : 251410028
 //Kelas: SI2A
 
-base class Animal {
-  void speak() {
-    print("Animal speaks");
-  }
-}
+class Warna {
+  final int r, g, b;
+  const Warna(this.r, this.g, this.b);
 
-base class Dog extends Animal {
   @override
-  void speak() {
-    print("Woof!");
-  }
-}
-
-base class Cat extends Animal {
-  @override
-  void speak() {
-    print("Meow!");
+  String toString() {
+    return 'Warna(r: $r, g: $g, b: $b)';
   }
 }
 
 void main() {
-  Animal dog = Dog();
-  dog.speak();
+  const merah = Warna(255, 0, 0);
+  const merahLagi = Warna(255, 0, 0);
 
-  Animal cat = Cat();
-  cat.speak();
+  print(merah);
+  print(merahLagi);
 }
 </pre>
 
 </div>
-</div>       
+
+</div>
+<button class="btn" onclick="openPopup('https://dartpad.dev/40cdc2f435ceca07ddaca0c3131d94c6?run=true')">Lihat DartPad</button>
+</div>        
 
 <div class="card">
-<h2>05.  Final Class</h2>
-<p>Final class adalah class yang tidak dapat diwariskan (tidak bisa di-extends). Biasanya digunakan untuk menjaga agar class tidak diubah oleh class lain sehingga lebih aman.</p>
+<h2>3. Initializer List</h2>
+<p>Initializer list digunakan untuk menginisialisasi variabel sebelum constructor dijalankan.</p>
+<div class="card">
 <div class="code-box">
 
 <h3>DART SOURCE CODE</h3>
 
 <pre>
-final class Settings {
-  final String theme;
-  final int fontSize;
+//Nama : Marsya Dwi Lintang
+//NIM  : 251410028
+//Kelas: SI2A
 
-  Settings({required this.theme, required this.fontSize});
+class Titik {
+  final double x, y;
 
-  void showSettings() {
-    print("Theme: $theme, Font Size: $fontSize");
+  Titik(double x, double y)
+      : x = x.abs(),
+        y = y.abs() {
+    print('Titik dibuat di (${this.x}, ${this.y})');
   }
 }
 
 void main() {
-  Settings settings = Settings(theme: "Dark", fontSize: 14);
-  settings.showSettings();
+  var titik1 = Titik(3.0, 4.0);
+  print('Titik 1: x=${titik1.x}, y=${titik1.y}');
+
+  var titik2 = Titik(-5.0, 10.0);
+  print('Titik 2: x=${titik2.x}, y=${titik2.y}');
+
+  var titik3 = Titik(-1.5, -2.5);
+  print('Titik 3: x=${titik3.x}, y=${titik3.y}');
 }
 </pre>
 
 </div>
+
+</div>
+<button class="btn" onclick="openPopup('https://dartpad.dev/607f6fe45706915f6be46629fb1303c9?run=true')">Lihat DartPad</button>
 </div>
 
 <div class="card">
-<h2>Perbandingan Class Modifiers</h2>
-<p>Sealed, base, dan final class merupakan class modifiers dalam Dart yang digunakan untuk mengatur pewarisan. Sealed class membatasi subclass hanya dalam satu file, base class memastikan class hanya dapat diwariskan dengan extends, sedangkan final class tidak dapat diwariskan sama sekali. Penggunaan masing-masing modifier disesuaikan dengan kebutuhan untuk menjaga struktur kode agar lebih aman dan terkontrol.</p>
+<h2>Praktik 1:Multiple Constructor</h2>
+<p>Program ini membuat class Mahasiswa yang memiliki beberapa constructor,
+yaitu constructor default dan named constructor (dariMap() dan tanpaNama()). 
+Tujuannya agar objek mahasiswa bisa dibuat dengan cara yang berbeda. Pada program dibuat 3 objek mahasiswa menggunakan masing-masing constructor.</p>
+<div class="card">
+<div class="code-box">
+
+<h3>DART SOURCE CODE</h3>
+
+<pre>
+//Nama : Marsya Dwi Lintang
+//NIM  : 251410028
+//Kelas: SI2A
+
+class Mahasiswa {
+  String nama;
+  int umur;
+
+  // Constructor default
+
+  Mahasiswa(this.nama, this.umur);
+
+  Mahasiswa.dariMap(Map<String, dynamic> data)
+      : nama = data['nama'],
+        umur = data['umur'];
+
+  Mahasiswa.tanpaNama(this.umur) : nama = "Tanpa Nama";
+
+  void tampilkan() {
+    print("Nama: $nama");
+    print("Umur: $umur");
+    print("----------------");
+  }
+}
+
+void main() {
+
+  var mhs1 = Mahasiswa("Marsya", 20);
+ 
+  var mhs2 = Mahasiswa.dariMap({
+    "nama": "Lintang",
+    "umur": 21
+  });
+
+  var mhs3 = Mahasiswa.tanpaNama(19);
+  mhs1.tampilkan();
+  mhs2.tampilkan();
+  mhs3.tampilkan();
+}
 </pre>
 
 </div>
+
 </div>
-
+<button class="btn" onclick="openPopup('https://dartpad.dev/a8c5f02228b860bd1fffe3fcb5cdf7d8?run=true')">Lihat Dartpad</button>
+</div>
+  
 <div class="card">
-<h2>06. Praktik 1 Sealed Class dengan Pattern Matching</h2>
-<p>Sealed class sering digunakan untuk menangani berbagai kondisi dalam program, seperti loading, berhasil, atau error. Dengan menggunakan sealed class, semua kemungkinan kondisi sudah ditentukan sehingga memudahkan dalam penanganan dan mengurangi kesalahan.</p>
-</p>
-
+<h2>4. Private Variable</h2>
+<p>Private variable adalah variabel yang hanya dapat diakses di dalam class dengan menggunakan tanda underscore (_).</p>
 <div class="card">
 <div class="code-box">
 
@@ -505,48 +665,33 @@ void main() {
 // NIM   : 251410028
 // Kelas : SI2A
 
-class Status {}
+class Person {
+  String _name;
+  int age;
 
-class Loading extends Status {}
-
-class Loaded extends Status {
-  final String data;
-  Loaded(this.data);
-}
-
-class Failed extends Status {
-  final String error;
-  Failed(this.error);
-}
-
-void handleStatus(Status status) {
-  if (status is Loading) {
-    print("Loading...");
-  } else if (status is Loaded) {
-    print("Data: ${status.data}");
-  } else if (status is Failed) {
-    print("Error: ${status.error}");
-  }
+  Person(this._name, this.age);
 }
 
 void main() {
-  handleStatus(Loading());
-  handleStatus(Loaded("Berhasil"));
-  handleStatus(Failed("Terjadi kesalahan"));
+
+  Person person = Person("Marsya", 20);
+
+  print(person._name);
+  print(person.age);
+
 }
 </pre>
 
 </div>
 
 </div>
-<button class="btn" onclick="openPopup('https://dartpad.dev/45336d6e9da86770a33ebad6d7a4e464?run=true')">Lihat DartPad</button>
-</div>  
-
+<button class="btn" onclick="openPopup('https://dartpad.dev/adccd4fbb13219cc689274f6de55bf79?run=true')">Lihat DartPad</button>
+</div>
 
 <div class="card">
-<h2>07. Studi Kasus: Sistem State Management</h2>
-<p>State management digunakan untuk mengatur kondisi dalam aplikasi, seperti saat loading, berhasil, atau terjadi error. Dengan menggunakan class, setiap kondisi dapat direpresentasikan secara jelas sehingga program menjadi lebih terstruktur dan mudah dipahami.</p>
-
+<h2>5. Getter</h2>
+<p>Getter adalah method yang digunakan untuk mengambil nilai dari variabel private.</p>
+<div class="card">
 <div class="code-box">
 
 <h3>DART SOURCE CODE</h3>
@@ -556,45 +701,40 @@ void main() {
 // NIM   : 251410028
 // Kelas : SI2A
 
-class AppState {}
+class Person {
+  String _name;
+  int age;
 
-class LoadingState extends AppState {}
+  Person(this._name, this.age);
 
-class SuccessState extends AppState {
-  final List<String> items;
-  SuccessState(this.items);
-}
+  String get getName1 {
+    return _name;
+  }
 
-class ErrorState extends AppState {
-  final String message;
-  ErrorState(this.message);
+  String getName() {
+    return _name;
+  }
 }
 
 void main() {
-  AppState state = SuccessState(["Item 1", "Item 2", "Item 3"]);
+  Person person = Person("Marsya", 19);
 
-  if (state is LoadingState) {
-    print("Loading...");
-  } else if (state is SuccessState) {
-    print("Data:");
-    for (var item in state.items) {
-      print(item);
-    }
-  } else if (state is ErrorState) {
-    print("Error: ${state.message}");
-  }
+  print(person.age);
+  print(person.getName());
+  print(person.getName1);
 }
 </pre>
 
 </div>
 
 </div>
-<button class="btn" onclick="openPopup('https://dartpad.dev/fdc663ef1f2fed65eecb80c7c9812d5e?run=true')">Lihat DartPad</button>
+<button class="btn" onclick="openPopup('https://dartpad.dev/884cf73ac193f066ca179710db4ebc68?run=true')">Lihat DartPad</button>
 </div>
 
 <div class="card">
 <h2>6. Setter</h2>
 <p>Setter adalah method yang digunakan untuk mengubah nilai dari variabel private.</p>
+<div class="card">
 <div class="code-box">
 
 <h3>DART SOURCE CODE</h3>
@@ -643,6 +783,7 @@ void main() {
 <div class="card">
 <h2>7. Getter & Setter dengan Validasi</h2>
 <p>Getter dan setter dapat digunakan untuk menambahkan validasi agar data yang dimasukkan sesuai aturan.</p>
+<div class="card">
 <div class="code-box">
 
 <h3>DART SOURCE CODE</h3>
@@ -706,6 +847,7 @@ void main() {
 <p>Program ini membuat class User dengan field private (_username, _password, _email). 
 Data diakses menggunakan getter dan setter. Setter memiliki validasi seperti username minimal 5 karakter, password minimal 8 karakter,
 dan email harus mengandung @, sehingga data lebih aman dan terkontrol.</p>
+<div class="card">
 <div class="code-box">
 
 <h3>DART SOURCE CODE</h3>
@@ -783,6 +925,7 @@ void main() {
 <div class="card">
 <h2>8. Encapsulation (Login System)</h2>
 <p>Encapsulation adalah konsep OOP yang membungkus data dan method dalam satu class serta membatasi akses langsung ke data tersebut.</p>
+<div class="card">
 <div class="code-box">
 
 <h3>DART SOURCE CODE</h3>
@@ -846,6 +989,7 @@ Selain itu, pembuatan class seperti RekeningBank menunjukkan bagaimana objek dap
 <h2>Bonus 3:Class Rekening Bank</h2>
 <p>Program ini membuat class RekeningBank dengan field private _nomorRekening dan _saldo.
 Class ini memiliki method deposit(), tarik(), dan cekSaldo() untuk melakukan transaksi. Program juga memiliki validasi agar saldo tidak menjadi negatif saat melakukan penarikan.</p>
+<div class="card">
 <div class="code-box">
 
 <h3>DART SOURCE CODE</h3>
