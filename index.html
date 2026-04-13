@@ -1,134 +1,246 @@
 <!DOCTYPE html>
+
 <html lang="id">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Multiple Inheritance - Yellow Theme</title>
+
+<title>Multiple Inheritance & Class Modifiers - Marsya Dwi Lintang</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
 body{
-    margin:0;
-    font-family:Arial, sans-serif;
-    background:#111;
-    color:#fff;
+background:#070a44;
+color:white;
+padding:40px 20px;
 }
 
 /* HEADER */
+
 header{
-    text-align:center;
-    padding:30px;
-    background:linear-gradient(45deg,#ffd900,#ffea00);
-    color:black;
-    font-weight:bold;
-    font-size:24px;
-    box-shadow:0 0 20px yellow;
+text-align:center;
+margin-bottom:50px;
+}
+
+header h1{
+font-size:42px;
+font-weight:700;
+}
+
+header p{
+opacity:0.8;
+margin-top:10px;
+}
+
+/* CONTAINER */
+
+.container{
+max-width:1100px;
+margin:40px auto;
+padding:0 15px;
 }
 
 /* CARD */
-.container{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:20px;
-    padding:30px;
-}
 
 .card{
-    background:#1a1a1a;
-    border:2px solid yellow;
-    border-radius:15px;
-    padding:20px;
-    width:250px;
-    text-align:center;
-    cursor:pointer;
-    transition:0.3s;
-    box-shadow:0 0 10px rgba(255,255,0,0.5);
+background:#1c1f6e;
+padding:30px;
+border-radius:18px;
+box-shadow:0 10px 30px rgba(0,0,0,0.4);
+margin-bottom:30px;
 }
 
-.card:hover{
-    transform:scale(1.05);
-    box-shadow:0 0 20px yellow;
+.card .card{
+  padding:5px;
+  margin:0;
 }
 
-.card h3{
-    color:yellow;
+/* TITLE */
+
+.card h2{
+color:#78dcff;
+margin-bottom:10px;
+}
+
+/* TEXT */
+
+.card p{
+line-height:1.7;
+opacity:0.9;
+margin-bottom:10px;
+}
+
+/* LIST */
+
+ul{
+margin-left:20px;
+line-height:1.7;
+margin-top:10px;
+}
+
+/* BUTTON */
+
+.btn{
+display:inline-block;
+margin-top:10px;
+padding:8px 14px;
+background:#00aaff;
+color:white;
+border-radius:8px;
+text-decoration:none;
+font-size:14px;
+cursor:pointer;
+}
+
+.btn:hover{
+background:#008ecc;
 }
 
 /* POPUP */
+
 .popup{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    display:none;
-    justify-content:center;
-    align-items:center;
-    background:rgba(0,0,0,0.8);
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.85);
+justify-content:center;
+align-items:center;
+z-index:9999;
 }
 
-/* GALAXY EFFECT */
 .popup-content{
-    width:80%;
-    max-width:500px;
-    padding:30px;
-    border-radius:20px;
-    color:white;
-    text-align:center;
-    position:relative;
-    overflow:hidden;
-    border:2px solid yellow;
-    box-shadow:0 0 30px yellow;
+width:90%;
+max-width:1200px;
+height:85%;
+background:#111;
+border-radius:12px;
+position:relative;
+overflow:hidden;
 }
 
-/* Background galaxy kuning */
-.popup-content::before{
-    content:"";
-    position:absolute;
-    width:200%;
-    height:200%;
-    top:-50%;
-    left:-50%;
-    background:
-        radial-gradient(circle at 30% 30%, #fff700, transparent 20%),
-        radial-gradient(circle at 70% 60%, #ffd900, transparent 20%),
-        radial-gradient(circle at 50% 80%, #fff200, transparent 20%);
-    animation:moveGalaxy 10s linear infinite;
-    opacity:0.3;
+.popup iframe{
+width:100%;
+height:100%;
+border:none;
 }
 
-@keyframes moveGalaxy{
-    0%{transform:rotate(0deg);}
-    100%{transform:rotate(360deg);}
-}
-
-.popup h2{
-    color:yellow;
-}
-
-/* CLOSE BUTTON */
 .close{
-    margin-top:20px;
-    padding:10px 20px;
-    background:yellow;
-    border:none;
-    border-radius:10px;
-    cursor:pointer;
-    font-weight:bold;
+position:absolute;
+top:10px;
+right:18px;
+font-size:30px;
+color:white;
+cursor:pointer;
 }
 
-.close:hover{
-    background:#fff700;
-    box-shadow:0 0 10px yellow;
+/* CODE BOX */
+
+/* PREVIEW SOURCE CODE */
+
+.code-box{
+background:#000;
+padding:30px;
+border-radius:20px;
+width:100%;
+max-width:650px;
+margin:20px auto;
+box-shadow:0 0 25px rgba(0,255,200,0.3);
+border:3px solid #3df5d4;
+}
+
+/* Judul kotak */
+
+.code-box h3{
+text-align:center;
+margin-bottom:20px;
+color:#ffd56b;
+font-size:18px;
+letter-spacing:1px;
+}
+
+/* Text kode */
+
+pre{
+color:#00ff9d;
+font-family:monospace;
+font-size:15px;
+line-height:1.6;
+
+white-space:pre-wrap;
+word-break:break-word;
+overflow-x:auto;
+}
+
+@media(max-width:768px){
+
+header h1{
+font-size:30px;
+}
+
+.popup-content{
+height:90%;
+width:95%;
+}
+
+}
+
+<style>
+
+.code-box{
+background:black;
+padding:25px;
+border-radius:20px;
+width:100%;
+max-width:650px;
+margin:20px auto;
+box-shadow:0 0 20px rgba(0,0,0,0.5);
+border:2px solid #00cfff;
+}
+
+.code-box h3{
+color:#ccc;
+text-align:center;
+margin-bottom:15px;
+}
+
+pre{
+color:#00cfff;
+font-family:monospace;
+font-size:14px;
+text-shadow:0 0 5px #00cfff;
+}
+
+.run{
+margin-top:20px;
+background:gold;
+border:none;
+padding:15px 40px;
+border-radius:40px;
+font-weight:bold;
+cursor:pointer;
 }
 
 </style>
+
 </head>
 
-<body>
+<body> 
 
 <header>
-<h1>✨ Multiple Inheritance & Class Modifiers ✨</h1>
+<h1>Multiple Inheritance & Class Modifiers</h1>
 <p>Marsya Dwi Lintang | 251410028 | SI2A</p>
 </header>
 
@@ -144,37 +256,677 @@ Satu class Bentuk bisa digunakan oleh Persegi, Lingkaran, dll tanpa mengubah car
 </p>
 </div>
 
-<div class="card" onclick="openPopup('Class B', 'Class B adalah class dasar kedua')">
-    <h3>Class B</h3>
-    <p>Klik untuk detail</p>
+<div class="card">
+<h2>Multiple Inheritance dengan Mixin</h2>
+<p>
+Dart tidak mendukung multiple inheritance secara langsung, tetapi menggunakan mixin untuk menambahkan banyak kemampuan dalam satu class.
+
+Contoh:
+Seekor bebek bisa terbang dan berenang karena menggunakan mixin.
+</p>
 </div>
 
-<div class="card" onclick="openPopup('Class C', 'Class C mewarisi dari A dan B')">
-    <h3>Class C</h3>
-    <p>Klik untuk detail</p>
-</div>
+<div class="card">
+<h2>01. Studi Kasus Mixin</h2>
+<p>Mixin digunakan untuk menambahkan kemampuan ke dalam class.
+
+Contoh:
+Burung bisa terbang, bebek bisa terbang dan berenang.</p>
+</p>
+
+<div class="card">
+<div class="code-box">
+
+<h3>DART SOURCE CODE</h3>
+
+<pre>
+//Nama : Marsya Dwi Lintang
+//NIM  : 251410028
+//Kelas: SI2A
+
+mixin CanFly {
+  void fly() {
+    print('Can fly!');
+  }
+}
+
+mixin CanSwim {
+  void swim() {
+    print('Can swim!');
+  }
+}
+
+class Bird with CanFly {}
+class Duck extends Bird with CanSwim {}
+
+void main() {
+  Bird bird = Bird();
+  bird.fly();
+
+  Duck duck = Duck();
+  duck.fly();
+  duck.swim();
+}
+</pre>
 
 </div>
 
+</div>
+<button class="btn" onclick="openPopup('https://dartpad.dev/2933747b7fd24800fd79d5390a2b8fb3?run=true')">Lihat DartPad</button>
+</div>
+
+<div class="card">
+<h2>02. Mixin dengan State</h2>
+<p>Mixin juga bisa menyimpan kondisi (state).
+
+Contoh:
+Objek bisa mengetahui apakah sudah terbang atau belum.</p>
+</p>
+
+<div class="card">
+<div class="code-box">
+
+<h3>DART SOURCE CODE</h3>
+
+<pre>
+//Nama : Marsya Dwi Lintang
+//NIM  : 251410028
+//Kelas: SI2A
+
+mixin CanFly {
+  bool _isFlying = false;
+
+  void fly() {
+    if (!_isFlying) {
+      _isFlying = true;
+      print('Started flying!');
+    } else {
+      print('Already flying!');
+    }
+  }
+}
+
+class Duck with CanFly {}
+
+void main() {
+  Duck duck = Duck();
+  duck.fly();
+  duck.fly();
+}
+</pre>
+
+</div>
+
+</div>
+<button class="btn" onclick="openPopup('https://dartpad.dev/2de038cb8be2e83e089f9ce5a6127ceb?run=true')">Lihat DartPad</button>
+</div>
+  
+<div class="card">
+<h2>Pengantar Class Modifiers</h2>
+<ul>
+<li>Contoh:</li>
+<li>sealed → hanya subclass tertentu</li>
+<li>base → hanya bisa diwariskan</li>
+<li>final → tidak bisa diwariskan</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>03. Sealed Class dan Keuntungan</h2>
+<p>Sealed class adalah jenis class dalam Dart yang membatasi pewarisan hanya pada file yang sama. Hal ini membuat struktur program lebih terkontrol karena semua subclass harus didefinisikan dalam satu tempat. Keuntungan menggunakan sealed class adalah dapat mengurangi kesalahan dalam program, mempermudah pengelolaan kode, serta sangat cocok digunakan untuk menangani berbagai kondisi seperti status sukses dan error.</p>
+<div class="code-box">
+
+<h3>DART SOURCE CODE</h3>
+
+<pre>
+// Nama  : Marsya Dwi Lintang
+// NIM   : 251410028
+// Kelas : SI2A
+
+
+sealed class ApiResponse {}
+
+class Success extends ApiResponse {
+  final String message;
+  Success(this.message);
+}
+
+class Error extends ApiResponse {
+  final String errorMessage;
+  Error(this.errorMessage);
+}
+
+void main() {
+  ApiResponse response = Success("Data berhasil");
+
+  if (response is Success) {
+    print("Success: ${response.message}");
+  } else if (response is Error) {
+    print("Error: ${response.errorMessage}");
+  }
+}
+</pre>
+
+</div>
+</div>
+
+<div class="card">
+<h2>04. Base Class dan Implementasinya</h2>
+<p>Base class adalah class dalam Dart yang digunakan untuk mengatur pewarisan agar lebih terkontrol. Class ini hanya dapat diwariskan menggunakan extends dan tidak dapat diimplementasikan secara bebas. Base class digunakan ketika kita ingin membuat class induk yang akan diturunkan ke beberapa subclass agar struktur program lebih rapi dan konsisten.</p>
+<div class="code-box">
+
+<h3>DART SOURCE CODE</h3>
+
+<pre>
+//Nama : Marsya Dwi Lintang
+//NIM  : 251410028
+//Kelas: SI2A
+
+base class Animal {
+  void speak() {
+    print("Animal speaks");
+  }
+}
+
+base class Dog extends Animal {
+  @override
+  void speak() {
+    print("Woof!");
+  }
+}
+
+base class Cat extends Animal {
+  @override
+  void speak() {
+    print("Meow!");
+  }
+}
+
+void main() {
+  Animal dog = Dog();
+  dog.speak();
+
+  Animal cat = Cat();
+  cat.speak();
+}
+</pre>
+
+</div>
+</div>       
+
+<div class="card">
+<h2>05.  Final Class</h2>
+<p>Final class adalah class yang tidak dapat diwariskan (tidak bisa di-extends). Biasanya digunakan untuk menjaga agar class tidak diubah oleh class lain sehingga lebih aman.</p>
+<div class="code-box">
+
+<h3>DART SOURCE CODE</h3>
+
+<pre>
+final class Settings {
+  final String theme;
+  final int fontSize;
+
+  Settings({required this.theme, required this.fontSize});
+
+  void showSettings() {
+    print("Theme: $theme, Font Size: $fontSize");
+  }
+}
+
+void main() {
+  Settings settings = Settings(theme: "Dark", fontSize: 14);
+  settings.showSettings();
+}
+</pre>
+
+</div>
+</div>
+
+<div class="card">
+<h2>Perbandingan Class Modifiers</h2>
+<p>Sealed, base, dan final class merupakan class modifiers dalam Dart yang digunakan untuk mengatur pewarisan. Sealed class membatasi subclass hanya dalam satu file, base class memastikan class hanya dapat diwariskan dengan extends, sedangkan final class tidak dapat diwariskan sama sekali. Penggunaan masing-masing modifier disesuaikan dengan kebutuhan untuk menjaga struktur kode agar lebih aman dan terkontrol.</p>
+</pre>
+
+</div>
+</div>
+
+<div class="card">
+<h2>06. Praktik 1 Sealed Class dengan Pattern Matching</h2>
+<p>Sealed class sering digunakan untuk menangani berbagai kondisi dalam program, seperti loading, berhasil, atau error. Dengan menggunakan sealed class, semua kemungkinan kondisi sudah ditentukan sehingga memudahkan dalam penanganan dan mengurangi kesalahan.</p>
+</p>
+
+<div class="card">
+<div class="code-box">
+
+<h3>DART SOURCE CODE</h3>
+
+<pre>
+// Nama  : Marsya Dwi Lintang
+// NIM   : 251410028
+// Kelas : SI2A
+
+class Status {}
+
+class Loading extends Status {}
+
+class Loaded extends Status {
+  final String data;
+  Loaded(this.data);
+}
+
+class Failed extends Status {
+  final String error;
+  Failed(this.error);
+}
+
+void handleStatus(Status status) {
+  if (status is Loading) {
+    print("Loading...");
+  } else if (status is Loaded) {
+    print("Data: ${status.data}");
+  } else if (status is Failed) {
+    print("Error: ${status.error}");
+  }
+}
+
+void main() {
+  handleStatus(Loading());
+  handleStatus(Loaded("Berhasil"));
+  handleStatus(Failed("Terjadi kesalahan"));
+}
+</pre>
+
+</div>
+
+</div>
+<button class="btn" onclick="openPopup('https://dartpad.dev/45336d6e9da86770a33ebad6d7a4e464?run=true')">Lihat DartPad</button>
+</div>  
+
+
+<div class="card">
+<h2>07. Studi Kasus: Sistem State Management</h2>
+<p>State management digunakan untuk mengatur kondisi dalam aplikasi, seperti saat loading, berhasil, atau terjadi error. Dengan menggunakan class, setiap kondisi dapat direpresentasikan secara jelas sehingga program menjadi lebih terstruktur dan mudah dipahami.</p>
+
+<div class="code-box">
+
+<h3>DART SOURCE CODE</h3>
+
+<pre>
+// Nama  : Marsya Dwi Lintang
+// NIM   : 251410028
+// Kelas : SI2A
+
+class AppState {}
+
+class LoadingState extends AppState {}
+
+class SuccessState extends AppState {
+  final List<String> items;
+  SuccessState(this.items);
+}
+
+class ErrorState extends AppState {
+  final String message;
+  ErrorState(this.message);
+}
+
+void main() {
+  AppState state = SuccessState(["Item 1", "Item 2", "Item 3"]);
+
+  if (state is LoadingState) {
+    print("Loading...");
+  } else if (state is SuccessState) {
+    print("Data:");
+    for (var item in state.items) {
+      print(item);
+    }
+  } else if (state is ErrorState) {
+    print("Error: ${state.message}");
+  }
+}
+</pre>
+
+</div>
+
+</div>
+<button class="btn" onclick="openPopup('https://dartpad.dev/fdc663ef1f2fed65eecb80c7c9812d5e?run=true')">Lihat DartPad</button>
+</div>
+
+<div class="card">
+<h2>6. Setter</h2>
+<p>Setter adalah method yang digunakan untuk mengubah nilai dari variabel private.</p>
+<div class="code-box">
+
+<h3>DART SOURCE CODE</h3>
+
+<pre>
+// Nama  : Marsya Dwi Lintang
+// NIM   : 251410028
+// Kelas : SI2A
+
+class Person {
+  String _name;
+  int age;
+
+  Person(this._name, this.age);
+
+  set setName1(String name) {
+    _name = name;
+  }
+
+  void setName(String name) {
+    _name = name;
+  }
+
+  String getName() {
+    return _name;
+  }
+}
+
+void main() {
+  Person person = Person("Marsya", 20);
+
+  person.setName('Dwi');
+  print(person.getName());
+
+  person.setName1 = 'Lintang';
+  print(person.getName());
+}
+</pre>
+
+</div>
+
+</div>
+<button class="btn" onclick="openPopup('https://dartpad.dev/29daa42f713a908e2f0a38c69fbcfbe5?run=true')">Lihat DartPad</button>
+</div>
+
+<div class="card">
+<h2>7. Getter & Setter dengan Validasi</h2>
+<p>Getter dan setter dapat digunakan untuk menambahkan validasi agar data yang dimasukkan sesuai aturan.</p>
+<div class="code-box">
+
+<h3>DART SOURCE CODE</h3>
+
+<pre>
+// Nama  : Marsya Dwi Lintang
+// NIM   : 251410028
+// Kelas : SI2A
+  
+class Produk {
+  String _nama;
+  double _harga;
+
+  Produk(this._nama, this._harga);
+
+  String get nama => _nama;
+  double get harga => _harga;
+
+  set nama(String value) {
+    if (value.length >= 3) {
+      _nama = value;
+    } else {
+      print('Nama minimal 3 karakter');
+    }
+  }
+
+  set harga(double value) {
+    if (value > 0) {
+      _harga = value;
+    } else {
+      print('Harga harus lebih besar dari 0');
+    }
+  }
+}
+
+void main() {
+  var produk1 = Produk('Monitor Samsung', 5500.0);
+
+  print(produk1.nama);
+  print(produk1.harga);
+
+  produk1.nama = 'Keyboard Mekanik';
+  produk1.harga = 6200.0;
+
+  print(produk1.nama);
+  print(produk1.harga);
+
+  produk1.nama = 'TV';
+  produk1.harga = -100;
+}
+</pre>
+
+</div>
+
+</div>
+<button class="btn" onclick="openPopup('https://dartpad.dev/f7092a32305dd71a0c3bc7877d161677?run=true')">Lihat DartPad</button>
+</div>
+
+<div class="card">
+<h2>Praktik 2:Enkapsulasi Lengkap</h2>
+<p>Program ini membuat class User dengan field private (_username, _password, _email). 
+Data diakses menggunakan getter dan setter. Setter memiliki validasi seperti username minimal 5 karakter, password minimal 8 karakter,
+dan email harus mengandung @, sehingga data lebih aman dan terkontrol.</p>
+<div class="code-box">
+
+<h3>DART SOURCE CODE</h3>
+
+<pre>
+// Nama  : Marsya Dwi Lintang
+// NIM   : 251410028
+// Kelas : SI2A
+
+class User {
+  String _username;
+  String _password;
+  String _email;
+  
+  User(this._username, this._password, this._email);
+
+  String get username => _username;
+  String get password => _password;
+  String get email => _email;
+
+  set username(String value) {
+    if (value.length >= 5) {
+      _username = value;
+    } else {
+      print("Username minimal 5 karakter");
+    }
+
+  }
+
+  set password(String value) {
+    if (value.length >= 8) {
+      _password = value;
+    } else {
+      print("Password minimal 8 karakter");
+    }
+
+  }
+
+  set email(String value) {
+    if (value.contains("@")) {
+      _email = value;
+    } else {
+      print("Email harus mengandung '@'");
+
+    }
+
+  }
+
+}
+
+void main() {
+  var user1 = User("marsya123", "password123", "marsya@email.com");
+  print("Username: ${user1.username}");
+  print("Password: ${user1.password}");
+  print("Email: ${user1.email}");
+  print("\n--- Update Data ---");
+
+  user1.username = "lintanggg";
+  user1.password = "12345678";
+  user1.email = "lintang@gmail.com";
+  
+  print("Username baru: ${user1.username}");
+  print("Password baru: ${user1.password}");
+  print("Email baru: ${user1.email}");
+
+}
+</pre>
+
+</div>
+
+</div>
+<button class="btn" onclick="openPopup('https://dartpad.dev/e7f78f03419fd925fda71f1e078ab385?run=true')">Lihat DartPad</button>
+</div>
+
+<div class="card">
+<h2>8. Encapsulation (Login System)</h2>
+<p>Encapsulation adalah konsep OOP yang membungkus data dan method dalam satu class serta membatasi akses langsung ke data tersebut.</p>
+<div class="code-box">
+
+<h3>DART SOURCE CODE</h3>
+
+<pre>
+// Nama  : Marsya Dwi Lintang
+// NIM   : 251410028
+// Kelas : SI2A
+
+class User {
+  String _username;
+  String _password;
+
+  User(this._username, this._password);
+
+  String get username => _username;
+
+  bool login(String username, String password) {
+    return _username == username && _password == password;
+  }
+
+  void gantiPassword(String lama, String baru) {
+    if (_password == lama) {
+      if (baru.length >= 8) {
+        _password = baru;
+        print('Password berhasil diubah');
+      } else {
+        print('Password minimal 8 karakter');
+      }
+    } else {
+      print('Password lama salah');
+    }
+  }
+}
+
+void main() {
+  final user1 = User('admin_user', 'password0443');
+
+  if (user1.login('admin_user', 'password0443')) {
+    print('Login berhasil');
+  }
+
+  user1.gantiPassword('password0443', 'newPassword456');
+}
+</pre>
+
+</div>
+
+</div>
+<button class="btn" onclick="openPopup('https://dartpad.dev/32a23520da0534cdb9edc41e81b2514e?run=true')">Lihat DartPad</button>
+</div>
+
+<div class="card">
+<h2>Kesimpulan</h2>
+<p>Dari praktikum ini dapat disimpulkan bahwa konsep Object Oriented Programming (OOP) dalam Dart membantu membuat program lebih terstruktur dan aman. 
+Penggunaan constructor memudahkan pembuatan objek dengan berbagai cara. Enkapsulasi digunakan untuk melindungi data dengan field private serta mengatur akses melalui getter dan setter. 
+Selain itu, pembuatan class seperti RekeningBank menunjukkan bagaimana objek dapat digunakan untuk mensimulasikan proses nyata seperti transaksi deposit, penarikan, dan pengecekan saldo dengan validasi agar data tetap aman.</p>
+</div>
+
+<div class="card">
+<h2>Bonus 3:Class Rekening Bank</h2>
+<p>Program ini membuat class RekeningBank dengan field private _nomorRekening dan _saldo.
+Class ini memiliki method deposit(), tarik(), dan cekSaldo() untuk melakukan transaksi. Program juga memiliki validasi agar saldo tidak menjadi negatif saat melakukan penarikan.</p>
+<div class="code-box">
+
+<h3>DART SOURCE CODE</h3>
+
+<pre>
+// Nama  : Marsya Dwi Lintang
+// NIM   : 251410028
+// Kelas : SI2A
+
+class RekeningBank {
+
+  String _nomorRekening;
+  double _saldo;
+
+  RekeningBank(this._nomorRekening, this._saldo);
+
+  void cekSaldo() {
+    print("Nomor Rekening: $_nomorRekening");
+    print("Saldo saat ini: Rp $_saldo");
+  }
+
+  void deposit(double jumlah) {
+    if (jumlah > 0) {
+      _saldo += jumlah;
+      print("Deposit berhasil: Rp $jumlah");
+    } else {
+      print("Jumlah deposit harus lebih dari 0");
+    }
+  }
+
+  void tarik(double jumlah) {
+    if (jumlah > 0 && jumlah <= _saldo) {
+      _saldo -= jumlah;
+      print("Penarikan berhasil: Rp $jumlah");
+    } else {
+      print("Saldo tidak cukup atau jumlah tidak valid");
+    }
+  }
+
+}
+
+void main() {
+
+  RekeningBank rekening1 = RekeningBank("123456789", 1000000);
+
+  rekening1.cekSaldo();
+  rekening1.deposit(500000);
+  rekening1.tarik(300000);
+  rekening1.cekSaldo();
+
+}
+</pre>
+
+</div>
+
+</div>
+<button class="btn" onclick="openPopup('https://dartpad.dev/fb147075a4bad2ce51bb83f6e5a75ec9?run=true')">Lihat DartPad</button>
+</div>
+  
+  
 <!-- POPUP -->
-<div class="popup" id="popup">
-    <div class="popup-content">
-        <h2 id="title"></h2>
-        <p id="desc"></p>
-        <button class="close" onclick="closePopup()">Tutup</button>
-    </div>
+
+<div id="popup" class="popup">
+<div class="popup-content">
+<span class="close" onclick="closePopup()">×</span>
+<iframe id="dartFrame"></iframe>
+</div>
 </div>
 
 <script>
-function openPopup(title, desc){
-    document.getElementById("popup").style.display = "flex";
-    document.getElementById("title").innerText = title;
-    document.getElementById("desc").innerText = desc;
+
+function openPopup(link){
+document.getElementById("popup").style.display="flex";
+document.getElementById("dartFrame").src=link;
 }
 
 function closePopup(){
-    document.getElementById("popup").style.display = "none";
+document.getElementById("popup").style.display="none";
+document.getElementById("dartFrame").src="";
 }
+
 </script>
 
 </body>
