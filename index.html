@@ -194,61 +194,30 @@
 <div class="container">
 
   <section>
-    <h2>Pengertian</h2>
+    <h2>Pengertian Polimorfisme & Abstraksi</h2>
     <p>
-      polimorfisme adalah kemampuan suatu objek atau metode untuk memiliki banyak bentuk sehingga satu fungsi bisa digunakan pada objek yang berbeda dengan cara kerja yang berbeda.
-      abstraksi adalah proses menyederhanakan sistem dengan menyembunyikan detail yang tidak perlu dan hanya menampilkan bagian penting agar lebih mudah dipahami dan digunakan.
+      Polimorfisme adalah kemampuan objek untuk digunakan dalam berbagai bentuk, sedangkan abstraksi digunakan untuk menyederhanakan program dengan menyembunyikan detail yang tidak diperlukan.
+      Contoh:
+      Satu class Bentuk bisa digunakan oleh Persegi, Lingkaran, dll tanpa mengubah cara pemanggilannya.
     </p>
   </section>
 
    <section>
-    <h2>01. Pewarisan</h2>
-
+    <h2>Multiple Inheritance dengan Mixin</h2>
     <p>
-    Pewarisan adalah konsep dimana class anak mengambil sifat dari class induk menggunakan extends. Dengan ini, kita tidak perlu menulis ulang kode yang sama.
-    </p>
-    
-    <div class="code-container">
-      <div class="code-header">DART SOURCE CODE</div>
-      <pre><code>//Nama : Marsya Dwi Lintang
-//NIM  : 251410028
-//Kelas: SI2A
-
-class Hewan {
-  void bersuara() {
-    print('...');
-  }
-}
-
-class Bebek extends Hewan {
-  @override
-  void bersuara() {
-    print('Uwek Uwek');
-  }
-}
-
-void main() {
-  Bebek k = Bebek();
-  k.bersuara();
-}
-        
-</code></pre>
-    </div>
-    <button onclick="openModal('https://dartpad.dev/29b71497b6969800457bc5c797f70f77&run=true')">Run Program</button>
-  </section>
-
-  <section>
-    <h2>Pengertian Polimorfisme</h2>
-    <p>
-      Polimorfisme adalah prinsip di mana satu antarmuka (nama method/fungsi) dapat digunakan untuk berbagai bentuk tipe data atau objek yang berbeda. Dalam pemrograman OOP, ini memungkinkan kelas turunan mengimplementasikan ulang metode kelas induk
+      Dart tidak mendukung multiple inheritance secara langsung, tetapi menggunakan mixin untuk menambahkan banyak kemampuan dalam satu class.
+      Contoh:
+      Seekor bebek bisa terbang dan berenang karena menggunakan mixin.
     </p>
   </section>
 
    <section>
-    <h2>02. Polimorfisme dengan Inheritance</h2>
+    <h2>01. Studi Kasus Mixin</h2>
 
     <p>
-      Kita bisa menyimpan objek anak ke dalam tipe parent. Jadi meskipun tipenya sama (misalnya Hewan), hasilnya bisa beda tergantung objeknya.
+      Mixin digunakan untuk menambahkan kemampuan ke dalam class.
+      Contoh:
+      Burung bisa terbang, bebek bisa terbang dan berenang.
     </p>
     
     <div class="code-container">
@@ -257,31 +226,33 @@ void main() {
 //Nim  : 251410028
 //Kelas: SI2A
 
-class Bentuk {
-  void gambar() => print('Menggambar bentuk');
+mixin CanFly {
+  void fly() {
+    print('Can fly!');
+  }
 }
 
-class Lingkaran extends Bentuk {
-  @override
-  void gambar() => print('Menggambar lingkaran');
+mixin CanSwim {
+  void swim() {
+    print('Can swim!');
+  }
 }
 
-class Persegi extends Bentuk {
-  @override
-  void gambar() => print('Menggambar persegi');
-}
+class Bird with CanFly {}
+class Duck extends Bird with CanSwim {}
 
 void main() {
-  Bentuk bentuk1 = Lingkaran(); 
-  Bentuk bentuk2 = Persegi();
+  Bird bird = Bird();
+  bird.fly();
 
-  bentuk1.gambar(); 
-  bentuk2.gambar(); 
+  Duck duck = Duck();
+  duck.fly();
+  duck.swim();
 }
 
 </code></pre>
     </div>
-    <button onclick="openModal('https://dartpad.dev/afb7fb9b09a162d9f845a25d6aa70933')">Run Program</button>
+    <button onclick="openModal('https://dartpad.dev/542938b1ef98ea114d0c2893cd624429&run=true')">Run Program</button>
   </section>
 
 <section>
