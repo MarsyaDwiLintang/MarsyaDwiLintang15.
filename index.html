@@ -736,6 +736,117 @@ Menggunakan sealed class AppState untuk merepresentasikan kondisi aplikasi seper
 </p>
 </div>
   
+<div class="card">
+<h2>10. Bonus Base Class Repository</h2>
+<p>Menunjukkan konsep inheritance, di mana class ProductRepository mewarisi dan mengubah method dari Repository sesuai kebutuhan.</p>
+<div class="card">
+<div class="code-box">
+
+<h3>DART SOURCE CODE</h3>
+
+<pre>
+//Nama : Marsya Dwi Lintang
+//NIM  : 251410028
+//Kelas: SI2A
+
+class Repository {
+  void create(String data) {
+    print("Menambahkan data: $data");
+  }
+
+  void read() {
+    print("Menampilkan semua data");
+  }
+
+  void update(String data) {
+    print("Mengubah data menjadi: $data");
+  }
+
+  void delete(String data) {
+    print("Menghapus data: $data");
+  }
+}
+
+class ProductRepository extends Repository {
+  @override
+  void create(String data) {
+    print("Produk berhasil ditambahkan: $data");
+  }
+
+  @override
+  void read() {
+    print("Daftar semua produk ditampilkan");
+  }
+
+  @override
+  void update(String data) {
+    print("Produk berhasil diperbarui: $data");
+  }
+
+  @override
+  void delete(String data) {
+    print("Produk berhasil dihapus: $data");
+  }
+}
+
+void main() {
+  var repo = ProductRepository();
+
+  repo.create("Laptop");
+  repo.read();
+  repo.update("Laptop Gaming");
+  repo.delete("Laptop");
+}
+</pre>
+
+</div>
+
+</div>
+<button class="btn" onclick="openPopup('https://dartpad.dev/8ce2f7d645ca8fa81d4d2780abe61ed9?run=true')">Lihat Capture</button>
+</div>        
+
+<div class="card">
+<h2>11. Bonus Final Class Mathutils.</h2>
+<p>Penggunaan utility class Mathutils dengan method static untuk operasi matematika tanpa perlu membuat object.</p>
+<div class="card">
+<div class="code-box">
+
+<h3>DART SOURCE CODE</h3>
+
+<pre>
+//Nama : Marsya Dwi Lintang
+//NIM  : 251410028
+//Kelas: SI2A
+
+class MathUtils {
+  static int tambah(int a, int b) => a + b;
+
+  static int kurang(int a, int b) => a - b;
+
+  static int kali(int a, int b) => a * b;
+
+  static double bagi(int a, int b) {
+    if (b == 0) {
+      print("Error: tidak bisa dibagi 0");
+      return 0;
+    }
+    return a / b;
+  }
+}
+
+void main() {
+  print("Tambah: ${MathUtils.tambah(8, 2)}");
+  print("Kurang: ${MathUtils.kurang(8, 2)}");
+  print("Kali: ${MathUtils.kali(8, 2)}");
+  print("Bagi: ${MathUtils.bagi(8, 2)}");
+}
+</pre>
+
+</div>
+
+</div>
+<button class="btn" onclick="openPopup('https://dartpad.dev/8ce2f7d645ca8fa81d4d2780abe61ed9?run=true')">Lihat Capture</button>
+</div>        
 
 <!-- POPUP -->
 
